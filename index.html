@@ -3,21 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#020817">
+<meta name="description" content="Manik Patil - Data Analyst and Business Analyst Portfolio">
 <title>Manik Patil | Data Analyst Portfolio</title>
-
-<meta name="description"
-content="Manik Patil's portfolio showcasing Data Analytics, SQL, Python, Power BI, Tableau and business intelligence projects.">
 
 <style>
 :root {
     --bg: #020817;
-    --card: rgba(5, 22, 45, 0.88);
-    --blue: #079cff;
+    --card: rgba(4, 20, 43, 0.88);
+    --blue: #078cff;
     --cyan: #00e5ff;
-    --text: #f3f8ff;
-    --muted: #b8c9df;
-    --border: rgba(0, 174, 255, 0.35);
+    --text: #f4f8ff;
+    --muted: #b9cce5;
+    --border: rgba(0, 190, 255, 0.35);
 }
 
 * {
@@ -35,29 +33,28 @@ body {
     overflow-x: hidden;
 }
 
-/* Animated background canvas */
 #dataCanvas {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
+    z-index: 0;
     pointer-events: none;
 }
 
 .background-glow {
     position: fixed;
     inset: 0;
-    z-index: -3;
+    z-index: -1;
     pointer-events: none;
     background:
         radial-gradient(ellipse at 15% 25%,
-        rgba(0, 85, 200, 0.22), transparent 45%),
-        radial-gradient(ellipse at 85% 55%,
-        rgba(0, 210, 255, 0.12), transparent 42%),
+        rgba(0, 90, 255, 0.22), transparent 45%),
+        radial-gradient(ellipse at 85% 65%,
+        rgba(0, 220, 255, 0.13), transparent 42%),
         linear-gradient(135deg, #020617, #06152e, #010611);
     background-size: 200% 200%;
-    animation: backgroundShift 18s ease-in-out infinite;
+    animation: backgroundShift 15s ease-in-out infinite;
 }
 
 @keyframes backgroundShift {
@@ -65,14 +62,18 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-/* Navigation */
+header, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
 header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(2, 8, 23, 0.88);
-    backdrop-filter: blur(14px);
+    background: rgba(2, 8, 23, 0.90);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    z-index: 10;
 }
 
 .navbar {
@@ -88,42 +89,38 @@ header {
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: white;
     white-space: nowrap;
 }
 
-.logo span {
+.logo span, .hero h1 span {
     color: var(--cyan);
 }
 
 nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 18px;
 }
 
 nav a {
     color: #dceaff;
     text-decoration: none;
     font-size: 14px;
-    transition: color 0.3s;
 }
 
 nav a:hover {
     color: var(--cyan);
 }
 
-/* Hero section */
 .hero {
     min-height: 570px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 85px 25px 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    max-width: 1100px;
-    margin: auto;
-    padding: 90px 25px 70px;
-    position: relative;
 }
 
 .eyebrow {
@@ -140,11 +137,6 @@ nav a:hover {
     margin-bottom: 15px;
 }
 
-.hero h1 span {
-    color: var(--cyan);
-    text-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
-}
-
 .hero h2 {
     font-size: clamp(20px, 3vw, 28px);
     color: #d7e8ff;
@@ -157,16 +149,16 @@ nav a:hover {
     font-size: 17px;
 }
 
-.buttons {
+.buttons, .contact-links {
     display: flex;
     flex-wrap: wrap;
     gap: 13px;
-    margin-top: 27px;
+    margin-top: 25px;
 }
 
 .btn {
     display: inline-block;
-    padding: 11px 20px;
+    padding: 10px 18px;
     border: 1px solid var(--blue);
     border-radius: 7px;
     color: white;
@@ -187,31 +179,30 @@ nav a:hover {
     box-shadow: 0 0 22px rgba(0, 174, 255, 0.35);
 }
 
-/* Sections */
 .container {
     max-width: 1100px;
     margin: auto;
     padding: 25px;
 }
 
-section.content-section {
-    padding: 32px 0;
-    scroll-margin-top: 80px;
+.content-section {
+    padding: 30px 0;
+    scroll-margin-top: 85px;
 }
 
 .section-title {
+    color: var(--cyan);
     font-size: 30px;
     margin-bottom: 22px;
-    color: var(--cyan);
 }
 
 .card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 27px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
-    backdrop-filter: blur(8px);
+    padding: 26px;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.17);
 }
 
 .card p {
@@ -219,7 +210,6 @@ section.content-section {
 }
 
 .card h3 {
-    color: white;
     margin-bottom: 10px;
 }
 
@@ -227,7 +217,6 @@ section.content-section {
     color: var(--cyan);
 }
 
-/* Skills */
 .skills {
     display: flex;
     flex-wrap: wrap;
@@ -238,19 +227,17 @@ section.content-section {
     padding: 7px 14px;
     border: 1px solid var(--blue);
     border-radius: 25px;
-    background: rgba(0, 140, 255, 0.09);
+    background: rgba(0, 140, 255, 0.10);
     color: #e4f5ff;
     font-size: 14px;
     transition: 0.3s;
 }
 
 .skill:hover {
-    background: rgba(0, 174, 255, 0.22);
+    background: rgba(0, 174, 255, 0.25);
     transform: translateY(-3px);
-    box-shadow: 0 0 14px rgba(0, 174, 255, 0.22);
 }
 
-/* Projects grid */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -270,15 +257,14 @@ section.content-section {
 }
 
 .project-card p {
-    margin-bottom: 18px;
     flex-grow: 1;
+    margin-bottom: 18px;
 }
 
 .project-card .btn {
     align-self: flex-start;
 }
 
-/* Certificates */
 .certificate-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -297,36 +283,15 @@ section.content-section {
     font-size: 14px;
 }
 
-/* Contact */
-.contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 20px;
-}
-
 footer {
     text-align: center;
     padding: 28px 15px;
     color: #94aac5;
     border-top: 1px solid var(--border);
-    margin-top: 40px;
+    margin-top: 35px;
     font-size: 14px;
 }
 
-/* Scroll reveal */
-.reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Responsive */
 @media (max-width: 700px) {
     .navbar {
         flex-direction: column;
@@ -343,12 +308,11 @@ footer {
     }
 
     .hero {
-        min-height: 480px;
-        padding-top: 65px;
+        min-height: 460px;
+        padding-top: 60px;
     }
 
-    .project-grid,
-    .certificate-list {
+    .project-grid, .certificate-list {
         grid-template-columns: 1fr;
     }
 
@@ -362,10 +326,12 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    .background-glow {
+        animation: none;
+    }
+
+    * {
         scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
     }
 }
 </style>
@@ -406,4 +372,398 @@ footer {
         and presenting insights through clear visualizations.
     </p>
 
-    <div class="
+    <div class="buttons">
+        <a class="btn primary" href="#projects">Explore My Projects</a>
+
+        <a class="btn" href="https://github.com/manikpatil-1415"
+           target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+
+        <a class="btn" href="https://www.linkedin.com/in/manik-patil1415"
+           target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+</section>
+
+<div class="container">
+
+<section class="content-section" id="about">
+    <div class="card">
+        <h2 class="section-title">About Me</h2>
+
+        <p>
+            I am a Bachelor of Science graduate interested in Data Analytics
+            and Business Analytics. I have completed training in Data Analytics
+            and Business Analytics with AI/ML at Naresh IT, Hyderabad.
+        </p>
+
+        <p style="margin-top:12px">
+            My learning focuses on SQL, Python, Excel, Power BI, Tableau,
+            data cleaning, visualization, and business insights. I am looking
+            for an entry-level opportunity where I can apply my analytical
+            skills and continue learning.
+        </p>
+    </div>
+</section>
+
+<section class="content-section" id="skills">
+    <h2 class="section-title">Technical Skills</h2>
+
+    <div class="skills">
+        <span class="skill">SQL</span>
+        <span class="skill">MySQL</span>
+        <span class="skill">Python</span>
+        <span class="skill">Pandas</span>
+        <span class="skill">NumPy</span>
+        <span class="skill">Matplotlib</span>
+        <span class="skill">Seaborn</span>
+        <span class="skill">Excel</span>
+        <span class="skill">Power BI</span>
+        <span class="skill">DAX</span>
+        <span class="skill">Tableau</span>
+        <span class="skill">Statistics</span>
+        <span class="skill">Data Cleaning</span>
+        <span class="skill">Data Visualization</span>
+        <span class="skill">AI/ML Fundamentals</span>
+    </div>
+</section>
+
+<section class="content-section" id="projects">
+    <h2 class="section-title">My Projects</h2>
+
+    <div class="project-grid">
+
+        <article class="card project-card">
+            <h3><span>01.</span> Sales Data Analytics Project</h3>
+            <p>
+                A sales analytics project using Excel, MySQL,
+                Power BI, and DAX.
+            </p>
+            <a class="btn"
+               href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project"
+               target="_blank" rel="noopener noreferrer">View Project ↗</a>
+        </article>
+
+        <article class="card project-card">
+            <h3><span>02.</span> Dashboard Design</h3>
+            <p>
+                A Power BI dashboard focused on Global Finance
+                and Sales Performance analysis.
+            </p>
+            <a class="btn"
+               href="https://github.com/manikpatil-1415/Dashboard-Design"
+               target="_blank" rel="noopener noreferrer">View Project ↗</a>
+        </article>
+
+        <article class="card project-card">
+            <h3><span>03.</span> Data Cleaning and Preprocessing</h3>
+            <p>
+                A Python and Pandas project focused on preparing
+                data for analysis.
+            </p>
+            <a class="btn"
+               href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing"
+               target="_blank" rel="noopener noreferrer">View Project ↗</a>
+        </article>
+
+        <article class="card project-card">
+            <h3><span>04.</span> Customer Churn Prediction</h3>
+            <p>
+                A Python and machine learning project focused
+                on customer churn prediction.
+            </p>
+            <a class="btn"
+               href="https://github.com/manikpatil-1415/Customer-Churn-Prediction"
+               target="_blank" rel="noopener noreferrer">View Project ↗</a>
+        </article>
+
+        <article class="card project-card">
+            <h3><span>05.</span> SQL Data Analysis</h3>
+            <p>
+                SQL queries and database practice for data analysis.
+            </p>
+            <a class="btn"
+               href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis"
+               target="_blank" rel="noopener noreferrer">View Project ↗</a>
+        </article>
+
+    </div>
+</section>
+
+<section class="content-section" id="certificates">
+    <h2 class="section-title">Certificates & Training</h2>
+
+    <div class="certificate-list">
+
+        <div class="certificate-item">
+            <h3>Deloitte Australia Data Analytics Job Simulation</h3>
+            <p>Forage | August 21, 2026</p>
+            <p>Excel analysis and Tableau dashboard practice.</p>
+        </div>
+
+        <div class="certificate-item">
+            <h3>SQL (Advanced)</h3>
+            <p>HackerRank | August 5, 2026</p>
+        </div>
+
+        <div class="certificate-item">
+            <h3>AI Tools & Claude Workshop</h3>
+            <p>be10x | September 13, 2026</p>
+        </div>
+
+        <div class="certificate-item">
+            <h3>Data Analytics & Business Analytics with AI/ML</h3>
+            <p>Naresh IT | Hyderabad</p>
+            <p>Training completed.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="content-section" id="contact">
+    <div class="card">
+        <h2 class="section-title">Let's Connect</h2>
+
+        <p>
+            I am interested in entry-level Data Analyst and Business
+            Analyst opportunities. Feel free to connect with me.
+        </p>
+
+        <div class="contact-links">
+            <a class="btn primary"
+               href="mailto:manikpatilmp1415@gmail.com">Email Me</a>
+
+            <a class="btn"
+               href="https://www.linkedin.com/in/manik-patil1415"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+
+            <a class="btn"
+               href="https://github.com/manikpatil-1415"
+               target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+    </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+    <p>© 2026 Manik Patil | Data Analyst Portfolio</p>
+    <p>Built with HTML, CSS & JavaScript</p>
+</footer>
+
+<script>
+(function () {
+    const canvas = document.getElementById("dataCanvas");
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) return;
+
+    let width, height, particles = [], time = 0;
+    let frameId = null;
+    let lastFrame = 0;
+
+    const mouse = { x: -1000, y: -1000 };
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    function resize() {
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = Math.floor(width * ratio);
+        canvas.height = Math.floor(height * ratio);
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const count = Math.min(
+            65, Math.max(28, Math.floor(width / 18))
+        );
+
+        particles = Array.from({ length: count }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 1.8 + 0.7
+        }));
+    }
+
+    function drawGrid() {
+        ctx.strokeStyle = "rgba(0,160,255,0.07)";
+        ctx.lineWidth = 1;
+
+        for (let y = 35; y < height; y += 55) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+            ctx.stroke();
+        }
+    }
+
+    function drawBars() {
+        const gap = Math.max(30, width / 35);
+        const baseline = height * 0.86;
+
+        for (let x = 12; x < width; x += gap) {
+            const phase = x * 0.035 + time * 1.2;
+            const barHeight =
+                18 + (Math.sin(phase) + 1) * height * 0.065;
+
+            const gradient = ctx.createLinearGradient(
+                x, baseline - barHeight, x, baseline
+            );
+
+            gradient.addColorStop(0, "rgba(0,220,255,0.35)");
+            gradient.addColorStop(1, "rgba(0,100,255,0.015)");
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(x, baseline - barHeight, 7, barHeight);
+        }
+    }
+
+    function drawWave() {
+        ctx.beginPath();
+
+        for (let x = 0; x <= width; x += 5) {
+            const y =
+                height * 0.63 +
+                Math.sin(x * 0.008 + time) * 22 +
+                Math.sin(x * 0.003 - time * 0.7) * 32;
+
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+
+        ctx.strokeStyle = "rgba(0,220,255,0.27)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+    }
+
+    function drawNetwork() {
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const distanceToMouse = Math.hypot(dx, dy);
+
+            if (distanceToMouse < 100 && distanceToMouse > 0) {
+                p.x -= dx / distanceToMouse * 0.35;
+                p.y -= dy / distanceToMouse * 0.35;
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = "#00cfff";
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const q = particles[j];
+                const distance = Math.hypot(p.x - q.x, p.y - q.y);
+
+                if (distance < 125) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(q.x, q.y);
+
+                    ctx.strokeStyle =
+                        "rgba(0,170,255," +
+                        (1 - distance / 125) * 0.36 + ")";
+
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+
+            if (distanceToMouse < 140) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.strokeStyle = "rgba(0,229,255,0.35)";
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+    }
+
+    function draw(timestamp) {
+        frameId = null;
+
+        if (document.hidden) return;
+
+        if (timestamp - lastFrame < 30) {
+            frameId = requestAnimationFrame(draw);
+            return;
+        }
+
+        lastFrame = timestamp;
+        time += 0.018;
+
+        ctx.clearRect(0, 0, width, height);
+
+        drawGrid();
+        drawBars();
+        drawWave();
+        drawNetwork();
+
+        if (!reduceMotion) {
+            frameId = requestAnimationFrame(draw);
+        }
+    }
+
+    function start() {
+        if (frameId !== null) {
+            cancelAnimationFrame(frameId);
+        }
+
+        lastFrame = 0;
+        frameId = requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", () => {
+        resize();
+
+        if (reduceMotion) draw(0);
+        else start();
+    });
+
+    window.addEventListener("pointermove", event => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+    }, { passive: true });
+
+    window.addEventListener("pointerleave", () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            if (frameId !== null) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            }
+        } else if (!reduceMotion) {
+            start();
+        }
+    });
+
+    resize();
+
+    if (reduceMotion) draw(0);
+    else start();
+})();
+</script>
+
+</body>
+</html>
