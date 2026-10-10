@@ -1,108 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manik Patil | Data Analyst Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manik Patil | Data Analyst Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#0b1120;color:#e5e7eb;line-height:1.7}
+header{background:#111827;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header h2{color:#38bdf8}
+nav a{color:white;text-decoration:none;margin:0 8px}
+nav a:hover{color:#38bdf8}
+section{padding:55px 8%}
+.hero{min-height:380px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:42px;color:white;margin:10px 0}
+.hero h1 span{color:#38bdf8}
+.hero h3{color:#94a3b8;font-size:21px}
+.hero p{max-width:720px;margin:18px 0}
+.button{display:inline-block;background:#0284c7;color:white;padding:10px 18px;margin:8px 8px 0 0;border-radius:6px;text-decoration:none}
+.button:hover{background:#0369a1}
+.section-title{font-size:29px;color:#38bdf8;margin-bottom:22px}
+.card-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#172033;border:1px solid #293548;padding:22px;border-radius:10px}
+.card h3{color:#7dd3fc;margin-bottom:10px}
+.skills{display:flex;flex-wrap:wrap;gap:12px}
+.skill{background:#172033;border:1px solid #38bdf8;padding:7px 15px;border-radius:20px}
+a{overflow-wrap:anywhere}
+footer{background:#111827;text-align:center;padding:24px}
+@media(max-width:600px){.hero h1{font-size:32px}nav a{display:inline-block;margin:5px}}
+</style>
+</head>
+<body>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<header>
+<h2>Manik Patil</h2>
+<nav>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#certificates">Certificates</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b1120;
-            color: #e5e7eb;
-            line-height: 1.7;
-        }
+<section class="hero">
+<h3>Hello, I'm</h3>
+<h1>Manik <span>Dnyaneshwar Patil</span></h1>
+<h3>Aspiring Data Analyst</h3>
+<p>I am a B.Sc. graduate developing my skills in data analytics, data visualization and business reporting. I enjoy using data to discover insights and support better decisions.</p>
+<div>
+<a class="button" href="#projects">Explore My Projects</a>
+<a class="button" href="https://github.com/manikpatil-1415" target="_blank">GitHub Profile</a>
+<a class="button" href="https://www.linkedin.com/in/manik-patil1415" target="_blank">LinkedIn</a>
+</div>
+</section>
 
-        header {
-            background: #111827;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+<section id="about">
+<h2 class="section-title">About Me</h2>
+<div class="card">
+<p>I am a recent Bachelor of Science graduate interested in Data Analytics and Business Analytics. I am training in Data Analytics and Business Analytics with AI/ML at Naresh IT, Hyderabad.</p>
+<p>My learning focuses on SQL, Python, Excel, Power BI, Tableau, data cleaning, visualization and business insights.</p>
+</div>
+</section>
 
-        header h2 {
-            color: #38bdf8;
-        }
+<section id="skills">
+<h2 class="section-title">Technical Skills</h2>
+<div class="skills">
+<span class="skill">SQL</span>
+<span class="skill">MySQL</span>
+<span class="skill">Python</span>
+<span class="skill">Pandas</span>
+<span class="skill">NumPy</span>
+<span class="skill">Matplotlib</span>
+<span class="skill">Seaborn</span>
+<span class="skill">Excel</span>
+<span class="skill">Power BI</span>
+<span class="skill">DAX</span>
+<span class="skill">Tableau</span>
+<span class="skill">Statistics</span>
+<span class="skill">Data Cleaning</span>
+<span class="skill">Data Visualization</span>
+</div>
+</section>
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 18px;
-        }
+<section id="projects">
+<h2 class="section-title">My Projects</h2>
+<div class="card-container">
+<div class="card">
+<h3>Sales Data Analytics Project</h3>
+<p>Sales analysis using Excel, MySQL, Power BI and DAX.</p>
+<a class="button" href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project" target="_blank">View Project</a>
+</div>
+<div class="card">
+<h3>Power BI Dashboard Design</h3>
+<p>Dashboard for global finance and sales performance analysis.</p>
+<a class="button" href="https://github.com/manikpatil-1415/Dashboard-Design" target="_blank">View Project</a>
+</div>
+<div class="card">
+<h3>Data Cleaning and Preprocessing</h3>
+<p>Data cleaning and preprocessing using Python and Pandas.</p>
+<a class="button" href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing" target="_blank">View Project</a>
+</div>
+<div class="card">
+<h3>Customer Churn Prediction</h3>
+<p>Customer churn prediction project using Python and machine learning.</p>
+<a class="button" href="https://github.com/manikpatil-1415/Customer-Churn-Prediction" target="_blank">View Project</a>
+</div>
+<div class="card">
+<h3>SQL Data Analysis</h3>
+<p>SQL queries and data analysis practice.</p>
+<a class="button" href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis" target="_blank">View Project</a>
+</div>
+</div>
+</section>
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+<section id="certificates">
+<h2 class="section-title">Certificates & Training</h2>
+<div class="card-container">
+<div class="card">
+<h3>SQL (Advanced)</h3>
+<p>HackerRank</p>
+<p>August 2026</p>
+</div>
+<div class="card">
+<h3>Deloitte Australia Data Analytics Job Simulation</h3>
+<p>Forage</p>
+<p>August 2026</p>
+</div>
+<div class="card">
+<h3>AI Tools & Claude Workshop</h3>
+<p>be10x</p>
+<p>September 2026</p>
+</div>
+<div class="card">
+<h3>Data Analytics Training</h3>
+<p>Naresh IT, Hyderabad</p>
+<p>Data Analytics, Business Analytics and AI/ML</p>
+</div>
+</div>
+</section>
 
-        section {
-            padding: 65px 8%;
-        }
+<section id="contact">
+<h2 class="section-title">Contact Me</h2>
+<div class="card">
+<p><strong>Email:</strong> <a href="mailto:manikpatilmp1415@gmail.com">manikpatilmp1415@gmail.com</a></p>
+<p><strong>GitHub:</strong> <a href="https://github.com/manikpatil-1415">github.com/manikpatil-1415</a></p>
+<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/manik-patil1415">View LinkedIn Profile</a></p>
+</div>
+</section>
 
-        .hero {
-            min-height: 390px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+<footer>
+<p>© 2026 Manik Dnyaneshwar Patil | Data Analyst Portfolio</p>
+</footer>
 
-        .hero h1 {
-            font-size: 44px;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .hero h1 span {
-            color: #38bdf8;
-        }
-
-        .hero h3 {
-            color: #94a3b8;
-            font-size: 22px;
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: 18px 0;
-        }
-
-        .button {
-            display: inline-block;
-            background: #0284c7;
-            color: white;
-            padding: 10px 20px;
-            margin: 8px 8px 0 0;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        .button:hover {
-            background: #0369a1;
-        }
-
-        .section-title {
-            font-size: 30px;
-            color: #38bdf8;
-            margin-bottom: 22px;
-        }
-
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: #172033;
-            border: 1px solid #293548;
-            padding: 22px;
-            border
+</body>
+</html>
