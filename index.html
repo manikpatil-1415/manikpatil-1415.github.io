@@ -3,26 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#020817">
-<meta name="description" content="Manik Patil - Data Analyst and Business Analyst Portfolio">
+
 <title>Manik Patil | Data Analyst Portfolio</title>
 
+<meta name="description"
+content="Manik Patil's Data Analyst Portfolio featuring SQL, Python, Excel, Power BI, Tableau, data analytics projects and dashboards.">
+
+<meta name="theme-color" content="#050816">
+
 <style>
+/* =========================================
+   GLOBAL SETTINGS
+========================================= */
+
 :root {
-    --bg: #020817;
-    --card: rgba(4, 20, 43, 0.88);
-    --blue: #078cff;
-    --cyan: #00e5ff;
-    --text: #f4f8ff;
-    --muted: #b9cce5;
-    --border: rgba(0, 190, 255, 0.35);
+    --bg: #050816;
+    --card: rgba(12, 23, 48, 0.78);
+    --blue: #38bdf8;
+    --cyan: #22d3ee;
+    --purple: #818cf8;
+    --text: #f1f5f9;
+    --muted: #a8b7ce;
+    --border: rgba(56, 189, 248, 0.22);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
+    scroll-padding-top: 85px;
 }
 
 body {
@@ -31,6 +44,89 @@ body {
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+section {
+    padding: 85px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: clamp(30px, 5vw, 43px);
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.section-title span {
+    color: var(--cyan);
+}
+
+.section-subtitle {
+    color: var(--muted);
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 42px;
+}
+
+/* =========================================
+   ANIMATED BACKGROUND
+========================================= */
+
+.background-glow {
+    position: fixed;
+    inset: -20%;
+    z-index: -3;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(37, 99, 235, 0.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 35%,
+            rgba(8, 145, 178, 0.17),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(79, 70, 229, 0.18),
+            transparent 38%
+        );
+
+    animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    0% {
+        transform: translate3d(-2%, -1%, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(2%, 2%, 0) scale(1.05);
+    }
+
+    100% {
+        transform: translate3d(-1%, 3%, 0) scale(1.02);
+    }
 }
 
 #dataCanvas {
@@ -38,48 +134,54 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -2;
     pointer-events: none;
+    opacity: 0.85;
 }
 
-.background-glow {
+.background-grid {
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background:
-        radial-gradient(ellipse at 15% 25%,
-        rgba(0, 90, 255, 0.22), transparent 45%),
-        radial-gradient(ellipse at 85% 65%,
-        rgba(0, 220, 255, 0.13), transparent 42%),
-        linear-gradient(135deg, #020617, #06152e, #010611);
-    background-size: 200% 200%;
-    animation: backgroundShift 15s ease-in-out infinite;
+
+    background-image:
+        linear-gradient(
+            rgba(56, 189, 248, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(56, 189, 248, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
 }
 
-@keyframes backgroundShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-header, main, footer {
-    position: relative;
-    z-index: 1;
-}
+/* =========================================
+   NAVIGATION
+========================================= */
 
 header {
     position: sticky;
     top: 0;
-    background: rgba(2, 8, 23, 0.90);
-    backdrop-filter: blur(12px);
+    z-index: 100;
+
+    background: rgba(5, 8, 22, 0.82);
+    backdrop-filter: blur(18px);
+
     border-bottom: 1px solid var(--border);
-    z-index: 10;
 }
 
 .navbar {
-    max-width: 1150px;
-    margin: auto;
-    padding: 15px 24px;
+    min-height: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,251 +189,671 @@ header {
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 23px;
+    font-weight: 800;
     white-space: nowrap;
 }
 
-.logo span, .hero h1 span {
+.logo span {
     color: var(--cyan);
 }
 
-nav {
+.nav-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
 }
 
-nav a {
-    color: #dceaff;
-    text-decoration: none;
+.nav-links a {
     font-size: 14px;
+    color: var(--muted);
+    transition: color 0.25s ease;
 }
 
-nav a:hover {
+.nav-links a:hover {
     color: var(--cyan);
 }
+
+.menu-button {
+    display: none;
+    border: 1px solid var(--border);
+    background: rgba(56, 189, 248, 0.08);
+    color: white;
+    font-size: 22px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
-    min-height: 570px;
-    max-width: 1100px;
-    margin: auto;
-    padding: 85px 25px 70px;
+    min-height: 86vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    padding: 95px 0 80px;
 }
 
-.eyebrow {
-    color: var(--cyan);
-    letter-spacing: 3px;
-    text-transform: uppercase;
+.hero-content {
+    max-width: 850px;
+}
+
+.availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+
+    background: rgba(8, 145, 178, 0.09);
+    color: #a5f3fc;
     font-size: 13px;
-    margin-bottom: 12px;
+
+    margin-bottom: 26px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 12px #4ade80;
+
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.75);
+    }
 }
 
 .hero h1 {
-    font-size: clamp(42px, 7vw, 76px);
-    line-height: 1.1;
-    margin-bottom: 15px;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: var(--cyan);
+    text-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
 }
 
 .hero h2 {
-    font-size: clamp(20px, 3vw, 28px);
-    color: #d7e8ff;
-    margin-bottom: 12px;
+    font-size: clamp(21px, 3vw, 30px);
+    color: #cbd5e1;
+    font-weight: 500;
+    margin-bottom: 20px;
 }
 
-.hero p {
-    max-width: 650px;
+.hero-description {
+    max-width: 680px;
     color: var(--muted);
     font-size: 17px;
+    margin-bottom: 30px;
 }
 
-.buttons, .contact-links {
+.hero-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 13px;
-    margin-top: 25px;
+    gap: 15px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 18px;
-    border: 1px solid var(--blue);
-    border-radius: 7px;
-    color: white;
-    text-decoration: none;
-    background: rgba(0, 132, 255, 0.12);
-    transition: 0.3s;
-    font-size: 14px;
-}
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
 
-.btn.primary {
-    background: linear-gradient(110deg, #087cff, #00b8ff);
-    border-color: transparent;
-    font-weight: bold;
+    padding: 12px 22px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 22px rgba(0, 174, 255, 0.35);
+    transform: translateY(-4px);
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px;
+.btn-primary {
+    color: #03101c;
+    background: linear-gradient(
+        110deg,
+        var(--cyan),
+        var(--blue)
+    );
+
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.16);
 }
 
-.content-section {
-    padding: 30px 0;
-    scroll-margin-top: 85px;
+.btn-primary:hover {
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.35);
 }
 
-.section-title {
+.btn-outline {
+    color: var(--text);
+    background: rgba(15, 23, 42, 0.65);
+}
+
+.btn-outline:hover {
+    background: rgba(56, 189, 248, 0.12);
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    max-width: 650px;
+    margin-top: 48px;
+}
+
+.stat {
+    padding: 18px;
+    border: 1px solid var(--border);
+    background: rgba(12, 23, 48, 0.62);
+    border-radius: 12px;
+}
+
+.stat h3 {
+    font-size: 27px;
     color: var(--cyan);
-    font-size: 30px;
-    margin-bottom: 22px;
 }
+
+.stat p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================================
+   COMMON CARDS
+========================================= */
 
 .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 26px;
-    backdrop-filter: blur(7px);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.17);
+    border-radius: 17px;
+    padding: 25px;
+
+    backdrop-filter: blur(12px);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(34, 211, 238, 0.65);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
 .card p {
     color: var(--muted);
+    font-size: 14px;
 }
 
-.card h3 {
-    margin-bottom: 10px;
+/* =========================================
+   ABOUT
+========================================= */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 25px;
+    align-items: stretch;
 }
 
-.card h3 span {
+.about-text p {
+    margin-bottom: 15px;
+    color: var(--muted);
+}
+
+.about-highlight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.highlight-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid var(--border);
     color: var(--cyan);
+    font-size: 20px;
 }
 
-.skills {
+.highlight-item h4 {
+    margin-bottom: 3px;
+}
+
+.highlight-item p {
+    font-size: 13px;
+}
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.skill-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-icon {
+    font-size: 23px;
+}
+
+.skill-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 9px;
+    margin-top: 17px;
 }
 
-.skill {
-    padding: 7px 14px;
-    border: 1px solid var(--blue);
-    border-radius: 25px;
-    background: rgba(0, 140, 255, 0.10);
-    color: #e4f5ff;
-    font-size: 14px;
-    transition: 0.3s;
+.tag {
+    display: inline-block;
+    padding: 6px 11px;
+
+    border-radius: 7px;
+    border: 1px solid rgba(56, 189, 248, 0.18);
+
+    background: rgba(56, 189, 248, 0.07);
+    color: #c6e8fa;
+
+    font-size: 12px;
 }
 
-.skill:hover {
-    background: rgba(0, 174, 255, 0.25);
-    transform: translateY(-3px);
-}
+/* =========================================
+   PROJECTS
+========================================= */
 
-.project-grid {
+.projects-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: 22px;
 }
 
 .project-card {
     display: flex;
     flex-direction: column;
-    min-height: 220px;
-    transition: transform 0.3s, border-color 0.3s;
+    min-height: 270px;
 }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--cyan);
+.project-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.project-icon {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid var(--border);
+    font-size: 23px;
+}
+
+.project-type {
+    font-size: 11px;
+    color: var(--cyan);
+    border: 1px solid var(--border);
+    padding: 5px 9px;
+    border-radius: 20px;
 }
 
 .project-card p {
-    flex-grow: 1;
+    margin-bottom: 17px;
+}
+
+.project-card .skill-tags {
+    margin-top: auto;
     margin-bottom: 18px;
 }
 
-.project-card .btn {
-    align-self: flex-start;
+.project-link {
+    color: var(--cyan);
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+    width: fit-content;
 }
 
-.certificate-list {
+.project-link:hover {
+    color: white;
+}
+
+/* =========================================
+   CERTIFICATES
+========================================= */
+
+.certificates-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    gap: 22px;
 }
 
-.certificate-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px;
+.certificate-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
 }
 
-.certificate-item p {
+.certificate-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+    background: rgba(129, 140, 248, 0.12);
+    border: 1px solid rgba(129, 140, 248, 0.35);
+
+    font-size: 24px;
+}
+
+.certificate-card h3 {
+    font-size: 17px;
+}
+
+.certificate-card .issuer {
+    color: var(--cyan);
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.certificate-card p {
+    font-size: 13px;
+}
+
+/* =========================================
+   EDUCATION
+========================================= */
+
+.education-card {
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.education-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(
+        to bottom,
+        var(--cyan),
+        var(--purple)
+    );
+}
+
+.education-card h3 {
+    font-size: 22px;
+}
+
+.education-card .degree {
+    color: var(--cyan);
+    margin: 5px 0 10px;
+}
+
+.education-card p {
     color: var(--muted);
     font-size: 14px;
 }
 
-footer {
+/* =========================================
+   CONTACT
+========================================= */
+
+.contact-card {
+    max-width: 800px;
+    margin: auto;
     text-align: center;
-    padding: 28px 15px;
-    color: #94aac5;
-    border-top: 1px solid var(--border);
-    margin-top: 35px;
-    font-size: 14px;
 }
 
-@media (max-width: 700px) {
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
+.contact-card > p {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 11px 15px;
+
+    background: rgba(56, 189, 248, 0.07);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    font-size: 13px;
+    transition: 0.25s ease;
+}
+
+.contact-link:hover {
+    background: rgba(34, 211, 238, 0.15);
+    border-color: var(--cyan);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 25px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+}
+
+footer span {
+    color: var(--cyan);
+}
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 850px) {
+    .nav-links {
+        gap: 14px;
     }
 
-    nav {
-        justify-content: center;
-        gap: 12px;
-    }
-
-    nav a {
+    .nav-links a {
         font-size: 12px;
     }
 
-    .hero {
-        min-height: 460px;
-        padding-top: 60px;
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .project-grid, .certificate-list {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        min-height: 68px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        padding: 10px 5%;
+        background: rgba(5, 8, 22, 0.97);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 85px 0 65px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .hero-stats {
+        gap: 9px;
+    }
+
+    .stat {
+        padding: 13px 9px;
+    }
+
+    .stat h3 {
+        font-size: 22px;
+    }
+
+    .stat p {
+        font-size: 10px;
+    }
+
+    section {
+        padding: 65px 0;
+    }
+
+    .skills-grid,
+    .projects-grid,
+    .certificates-grid {
         grid-template-columns: 1fr;
     }
 
     .card {
-        padding: 20px;
+        padding: 21px;
     }
 
-    .section-title {
-        font-size: 26px;
+    .hero-buttons .btn {
+        flex: 1;
+        min-width: 145px;
+    }
+
+    .contact-links {
+        flex-direction: column;
+    }
+
+    .contact-link {
+        justify-content: center;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .background-glow {
-        animation: none;
-    }
-
-    * {
-        scroll-behavior: auto !important;
+@media (max-width: 360px) {
+    .hero-stats {
+        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -340,374 +862,1248 @@ footer {
 <body>
 
 <div class="background-glow"></div>
+<div class="background-grid"></div>
 <canvas id="dataCanvas" aria-hidden="true"></canvas>
 
-<header>
-    <div class="navbar">
-        <div class="logo">Manik <span>Patil</span></div>
+<!-- =========================================
+     NAVIGATION
+========================================= -->
 
-        <nav aria-label="Main navigation">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#certificates">Certificates</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </div>
+<header>
+    <nav class="navbar container">
+
+        <a href="#home" class="logo">
+            MANIK<span>.</span>
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open navigation menu"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
 </header>
 
 <main>
 
+<!-- =========================================
+     HERO SECTION
+========================================= -->
+
 <section class="hero" id="home">
-    <div class="eyebrow">Welcome to my portfolio</div>
 
-    <h1>Hi, I'm<br><span>Manik Patil</span></h1>
+    <div class="container">
 
-    <h2>Data Analyst | Business Analyst</h2>
+        <div class="hero-content">
 
-    <p>
-        Turning Data into Insights for Better Decisions.
-        I enjoy exploring data, finding meaningful patterns,
-        and presenting insights through clear visualizations.
-    </p>
+            <div class="availability">
+                <span class="status-dot"></span>
+                Open to Entry-Level Opportunities
+            </div>
 
-    <div class="buttons">
-        <a class="btn primary" href="#projects">Explore My Projects</a>
+            <h1>
+                Hi, I'm <span>Manik Patil</span>
+            </h1>
 
-        <a class="btn" href="https://github.com/manikpatil-1415"
-           target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+            <h2>Data Analyst | Business Analytics</h2>
 
-        <a class="btn" href="https://www.linkedin.com/in/manik-patil1415"
-           target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <p class="hero-description">
+                I turn raw data into meaningful insights using
+                SQL, Python, Excel, Power BI and Tableau.
+                I enjoy exploring datasets, building dashboards
+                and helping businesses make data-driven decisions.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn btn-primary">
+                    Explore My Projects ↗
+                </a>
+
+                <a
+                    href="https://github.com/manikpatil-1415"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline">
+                    GitHub Profile ↗
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/manik-patil1415"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline">
+                    LinkedIn ↗
+                </a>
+
+            </div>
+
+            <div class="hero-stats">
+
+                <div class="stat">
+                    <h3>SQL</h3>
+                    <p>Data Analysis</p>
+                </div>
+
+                <div class="stat">
+                    <h3>Python</h3>
+                    <p>Data Processing</p>
+                </div>
+
+                <div class="stat">
+                    <h3>BI</h3>
+                    <p>Dashboards & Insights</p>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
 </section>
 
-<div class="container">
+<!-- =========================================
+     ABOUT SECTION
+========================================= -->
 
-<section class="content-section" id="about">
-    <div class="card">
-        <h2 class="section-title">About Me</h2>
+<section id="about">
 
-        <p>
-            I am a Bachelor of Science graduate interested in Data Analytics
-            and Business Analytics. I have completed training in Data Analytics
-            and Business Analytics with AI/ML at Naresh IT, Hyderabad.
+    <div class="container">
+
+        <h2 class="section-title">
+            About <span>Me</span>
+        </h2>
+
+        <p class="section-subtitle">
+            A curious learner passionate about data,
+            analytics and solving business problems.
         </p>
 
-        <p style="margin-top:12px">
-            My learning focuses on SQL, Python, Excel, Power BI, Tableau,
-            data cleaning, visualization, and business insights. I am looking
-            for an entry-level opportunity where I can apply my analytical
-            skills and continue learning.
+        <div class="about-grid">
+
+            <div class="card about-text reveal">
+
+                <h3>My Journey</h3>
+
+                <p>
+                    I am a B.Sc. graduate with training in
+                    Data Analytics and Business Analytics.
+                    My goal is to build a career as a Data Analyst
+                    and use data to discover useful business insights.
+                </p>
+
+                <p>
+                    I have worked with SQL, Python, Excel,
+                    Power BI and Tableau through learning,
+                    analytical exercises and projects.
+                </p>
+
+                <p>
+                    I am continuously improving my technical
+                    skills, analytical thinking, data visualization
+                    and ability to communicate findings clearly.
+                </p>
+
+            </div>
+
+            <div class="card about-highlight reveal">
+
+                <div class="highlight-item">
+
+                    <div class="highlight-icon">📊</div>
+
+                    <div>
+                        <h4>Data Analysis</h4>
+                        <p>
+                            Explore, clean and analyze data
+                            to identify meaningful patterns.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="highlight-item">
+
+                    <div class="highlight-icon">📈</div>
+
+                    <div>
+                        <h4>Data Visualization</h4>
+                        <p>
+                            Build informative dashboards
+                            and present key metrics.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="highlight-item">
+
+                    <div class="highlight-icon">💡</div>
+
+                    <div>
+                        <h4>Continuous Learning</h4>
+                        <p>
+                            Improve analytical and technical
+                            skills through hands-on practice.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SKILLS SECTION
+========================================= -->
+
+<section id="skills">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Technical <span>Skills</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Tools and technologies used for data analysis,
+            reporting and visualization.
         </p>
-    </div>
-</section>
 
-<section class="content-section" id="skills">
-    <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
 
-    <div class="skills">
-        <span class="skill">SQL</span>
-        <span class="skill">MySQL</span>
-        <span class="skill">Python</span>
-        <span class="skill">Pandas</span>
-        <span class="skill">NumPy</span>
-        <span class="skill">Matplotlib</span>
-        <span class="skill">Seaborn</span>
-        <span class="skill">Excel</span>
-        <span class="skill">Power BI</span>
-        <span class="skill">DAX</span>
-        <span class="skill">Tableau</span>
-        <span class="skill">Statistics</span>
-        <span class="skill">Data Cleaning</span>
-        <span class="skill">Data Visualization</span>
-        <span class="skill">AI/ML Fundamentals</span>
-    </div>
-</section>
+            <div class="card skill-card reveal">
 
-<section class="content-section" id="projects">
-    <h2 class="section-title">My Projects</h2>
+                <h3>
+                    <span class="skill-icon">🗄️</span>
+                    SQL & Databases
+                </h3>
 
-    <div class="project-grid">
+                <div class="skill-tags">
+                    <span class="tag">SQL</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Joins</span>
+                    <span class="tag">CTEs</span>
+                    <span class="tag">Subqueries</span>
+                    <span class="tag">Window Functions</span>
+                    <span class="tag">Aggregations</span>
+                </div>
 
-        <article class="card project-card">
-            <h3><span>01.</span> Sales Data Analytics Project</h3>
-            <p>
-                A sales analytics project using Excel, MySQL,
-                Power BI, and DAX.
-            </p>
-            <a class="btn"
-               href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project"
-               target="_blank" rel="noopener noreferrer">View Project ↗</a>
-        </article>
+            </div>
 
-        <article class="card project-card">
-            <h3><span>02.</span> Dashboard Design</h3>
-            <p>
-                A Power BI dashboard focused on Global Finance
-                and Sales Performance analysis.
-            </p>
-            <a class="btn"
-               href="https://github.com/manikpatil-1415/Dashboard-Design"
-               target="_blank" rel="noopener noreferrer">View Project ↗</a>
-        </article>
+            <div class="card skill-card reveal">
 
-        <article class="card project-card">
-            <h3><span>03.</span> Data Cleaning and Preprocessing</h3>
-            <p>
-                A Python and Pandas project focused on preparing
-                data for analysis.
-            </p>
-            <a class="btn"
-               href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing"
-               target="_blank" rel="noopener noreferrer">View Project ↗</a>
-        </article>
+                <h3>
+                    <span class="skill-icon">🐍</span>
+                    Python
+                </h3>
 
-        <article class="card project-card">
-            <h3><span>04.</span> Customer Churn Prediction</h3>
-            <p>
-                A Python and machine learning project focused
-                on customer churn prediction.
-            </p>
-            <a class="btn"
-               href="https://github.com/manikpatil-1415/Customer-Churn-Prediction"
-               target="_blank" rel="noopener noreferrer">View Project ↗</a>
-        </article>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">Matplotlib</span>
+                    <span class="tag">Seaborn</span>
+                    <span class="tag">Data Cleaning</span>
+                </div>
 
-        <article class="card project-card">
-            <h3><span>05.</span> SQL Data Analysis</h3>
-            <p>
-                SQL queries and database practice for data analysis.
-            </p>
-            <a class="btn"
-               href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis"
-               target="_blank" rel="noopener noreferrer">View Project ↗</a>
-        </article>
+            </div>
 
-    </div>
-</section>
+            <div class="card skill-card reveal">
 
-<section class="content-section" id="certificates">
-    <h2 class="section-title">Certificates & Training</h2>
+                <h3>
+                    <span class="skill-icon">📊</span>
+                    Business Intelligence
+                </h3>
 
-    <div class="certificate-list">
+                <div class="skill-tags">
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                    <span class="tag">Power Query</span>
+                    <span class="tag">Tableau</span>
+                    <span class="tag">Dashboards</span>
+                </div>
 
-        <div class="certificate-item">
-            <h3>Deloitte Australia Data Analytics Job Simulation</h3>
-            <p>Forage | August 21, 2026</p>
-            <p>Excel analysis and Tableau dashboard practice.</p>
+            </div>
+
+            <div class="card skill-card reveal">
+
+                <h3>
+                    <span class="skill-icon">📑</span>
+                    Microsoft Excel
+                </h3>
+
+                <div class="skill-tags">
+                    <span class="tag">Data Cleaning</span>
+                    <span class="tag">Pivot Tables</span>
+                    <span class="tag">Charts</span>
+                    <span class="tag">Formulas</span>
+                    <span class="tag">Reporting</span>
+                </div>
+
+            </div>
+
+            <div class="card skill-card reveal">
+
+                <h3>
+                    <span class="skill-icon">📐</span>
+                    Analytical Skills
+                </h3>
+
+                <div class="skill-tags">
+                    <span class="tag">Statistics</span>
+                    <span class="tag">EDA</span>
+                    <span class="tag">Data Interpretation</span>
+                    <span class="tag">Business Insights</span>
+                    <span class="tag">Problem Solving</span>
+                </div>
+
+            </div>
+
+            <div class="card skill-card reveal">
+
+                <h3>
+                    <span class="skill-icon">🤖</span>
+                    Additional Knowledge
+                </h3>
+
+                <div class="skill-tags">
+                    <span class="tag">AI/ML Fundamentals</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Google Colab</span>
+                    <span class="tag">Data Storytelling</span>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="certificate-item">
-            <h3>SQL (Advanced)</h3>
-            <p>HackerRank | August 5, 2026</p>
+    </div>
+
+</section>
+
+<!-- =========================================
+     PROJECTS SECTION
+========================================= -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Featured <span>Projects</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Explore my data analysis, dashboarding,
+            data preparation and machine learning work.
+        </p>
+
+        <div class="projects-grid">
+
+            <!-- Project 1 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">🗄️</div>
+
+                    <span class="project-type">
+                        SQL
+                    </span>
+
+                </div>
+
+                <h3>SQL Data Analysis</h3>
+
+                <p>
+                    SQL-based data analysis practice using
+                    queries, aggregations and data exploration
+                    to answer analytical questions.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">SQL</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Data Analysis</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View Project on GitHub ↗
+                </a>
+
+            </article>
+
+            <!-- Project 2 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">📊</div>
+
+                    <span class="project-type">
+                        Power BI
+                    </span>
+
+                </div>
+
+                <h3>Dashboard Design</h3>
+
+                <p>
+                    An interactive dashboard project focused
+                    on presenting financial and sales performance
+                    through visualizations and business metrics.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                    <span class="tag">Data Visualization</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415/Dashboard-Design"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View Project on GitHub ↗
+                </a>
+
+            </article>
+
+            <!-- Project 3 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">🧹</div>
+
+                    <span class="project-type">
+                        Python
+                    </span>
+
+                </div>
+
+                <h3>Data Cleaning & Preprocessing</h3>
+
+                <p>
+                    A data preparation project focused on
+                    cleaning datasets, handling missing values
+                    and preparing data for further analysis.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">NumPy</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View Project on GitHub ↗
+                </a>
+
+            </article>
+
+            <!-- Project 4 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">🔎</div>
+
+                    <span class="project-type">
+                        Analytics
+                    </span>
+
+                </div>
+
+                <h3>Sales Data Analytics</h3>
+
+                <p>
+                    A sales analytics project combining
+                    data preparation, database queries,
+                    reporting and visualization to explore
+                    business performance.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">Excel</span>
+                    <span class="tag">MySQL</span>
+                    <span class="tag">Power BI</span>
+                    <span class="tag">DAX</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View Project on GitHub ↗
+                </a>
+
+            </article>
+
+            <!-- Project 5 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">🤖</div>
+
+                    <span class="project-type">
+                        Machine Learning
+                    </span>
+
+                </div>
+
+                <h3>Customer Churn Prediction</h3>
+
+                <p>
+                    A machine learning project focused on
+                    customer churn analysis and exploring
+                    factors associated with customer retention.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Machine Learning</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415/Customer-Churn-Prediction"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View Project on GitHub ↗
+                </a>
+
+            </article>
+
+            <!-- Project 6 -->
+
+            <article class="card project-card reveal">
+
+                <div class="project-top">
+
+                    <div class="project-icon">📈</div>
+
+                    <span class="project-type">
+                        Data Visualization
+                    </span>
+
+                </div>
+
+                <h3>Tableau Analytics</h3>
+
+                <p>
+                    Explore my GitHub profile for data analytics
+                    work and visit my LinkedIn profile for
+                    additional project updates and professional work.
+                </p>
+
+                <div class="skill-tags">
+                    <span class="tag">Tableau</span>
+                    <span class="tag">Visualization</span>
+                    <span class="tag">Business Analytics</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/manikpatil-1415"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Explore GitHub Profile ↗
+                </a>
+
+            </article>
+
         </div>
 
-        <div class="certificate-item">
-            <h3>AI Tools & Claude Workshop</h3>
-            <p>be10x | September 13, 2026</p>
+    </div>
+
+</section>
+
+<!-- =========================================
+     CERTIFICATES SECTION
+========================================= -->
+
+<section id="certificates">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Certificates & <span>Achievements</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Professional learning and practical experience.
+        </p>
+
+        <div class="certificates-grid">
+
+            <div class="card certificate-card reveal">
+
+                <div class="certificate-icon">🏆</div>
+
+                <div>
+                    <h3>Deloitte Australia Data Analytics Job Simulation</h3>
+
+                    <p class="issuer">
+                        Forage · August 2026
+                    </p>
+
+                    <p>
+                        Completed a data analytics job simulation
+                        involving data classification, Excel
+                        analysis, dashboard creation and
+                        business-oriented conclusions.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="card certificate-card reveal">
+
+                <div class="certificate-icon">💻</div>
+
+                <div>
+                    <h3>SQL (Advanced)</h3>
+
+                    <p class="issuer">
+                        HackerRank · August 2026
+                    </p>
+
+                    <p>
+                        SQL certification demonstrating knowledge
+                        of advanced querying concepts and
+                        database problem solving.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="card certificate-card reveal">
+
+                <div class="certificate-icon">🤖</div>
+
+                <div>
+                    <h3>AI Tools & Claude Workshop</h3>
+
+                    <p class="issuer">
+                        be10x · September 2026
+                    </p>
+
+                    <p>
+                        Workshop focused on learning about
+                        AI tools and their practical applications.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="card certificate-card reveal">
+
+                <div class="certificate-icon">🎓</div>
+
+                <div>
+                    <h3>Data Analytics & Business Analytics with AI/ML</h3>
+
+                    <p class="issuer">
+                        Naresh IT · Hyderabad
+                    </p>
+
+                    <p>
+                        Completed training covering data analytics
+                        tools, business analytics and AI/ML
+                        fundamentals.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="certificate-item">
+    </div>
+
+</section>
+
+<!-- =========================================
+     EDUCATION SECTION
+========================================= -->
+
+<section id="education">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            My <span>Education</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Academic background and professional training.
+        </p>
+
+        <div class="card education-card reveal">
+
+            <h3>Bachelor of Science (B.Sc.)</h3>
+
+            <p class="degree">
+                Science and Technology · 2023–2026
+            </p>
+
+            <p>
+                Adarsh Senior College, Omerga,
+                Dharashiv, Maharashtra.
+            </p>
+
+            <br>
+
             <h3>Data Analytics & Business Analytics with AI/ML</h3>
-            <p>Naresh IT | Hyderabad</p>
-            <p>Training completed.</p>
+
+            <p class="degree">
+                Professional Training · Naresh IT, Hyderabad
+            </p>
+
+            <p>
+                Training in data analytics, business analytics,
+                programming and data visualization tools.
+            </p>
+
         </div>
 
     </div>
+
 </section>
 
-<section class="content-section" id="contact">
-    <div class="card">
-        <h2 class="section-title">Let's Connect</h2>
+<!-- =========================================
+     CONTACT SECTION
+========================================= -->
 
-        <p>
-            I am interested in entry-level Data Analyst and Business
-            Analyst opportunities. Feel free to connect with me.
+<section id="contact">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Let's <span>Connect</span>
+        </h2>
+
+        <p class="section-subtitle">
+            I am interested in entry-level Data Analyst
+            opportunities, internships and professional
+            connections.
         </p>
 
-        <div class="contact-links">
-            <a class="btn primary"
-               href="mailto:manikpatilmp1415@gmail.com">Email Me</a>
+        <div class="card contact-card reveal">
 
-            <a class="btn"
-               href="https://www.linkedin.com/in/manik-patil1415"
-               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <h3>Have an opportunity or project in mind?</h3>
 
-            <a class="btn"
-               href="https://github.com/manikpatil-1415"
-               target="_blank" rel="noopener noreferrer">GitHub</a>
+            <p>
+                Feel free to connect with me through email,
+                LinkedIn or GitHub.
+            </p>
+
+            <div class="contact-links">
+
+                <a
+                    class="contact-link"
+                    href="mailto:manikpatilmp1415@gmail.com">
+                    ✉️ Email Me
+                </a>
+
+                <a
+                    class="contact-link"
+                    href="https://www.linkedin.com/in/manikpatil1415"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    💼 LinkedIn
+                </a>
+
+                <a
+                    class="contact-link"
+                    href="https://github.com/manikpatil-1415"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    💻 GitHub
+                </a>
+
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
-</div>
 </main>
 
+<!-- =========================================
+     FOOTER
+========================================= -->
+
 <footer>
-    <p>© 2026 Manik Patil | Data Analyst Portfolio</p>
-    <p>Built with HTML, CSS & JavaScript</p>
+    <div class="container">
+        <p>
+            Designed with <span>♥</span> by Manik Patil
+        </p>
+
+        <p>
+            Data Analyst Portfolio ·
+            <span id="currentYear"></span>
+        </p>
+    </div>
 </footer>
 
+<!-- =========================================
+     JAVASCRIPT
+     ANIMATED CHARTS + PARTICLES + NETWORK
+========================================= -->
+
 <script>
-(function () {
+(() => {
+    "use strict";
+
+    /* =====================================
+       MOBILE NAVIGATION
+    ===================================== */
+
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        menuButton.textContent = isOpen ? "✕" : "☰";
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("open");
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.textContent = "☰";
+        });
+    });
+
+    /* =====================================
+       CURRENT YEAR
+    ===================================== */
+
+    document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+    /* =====================================
+       SCROLL REVEAL
+    ===================================== */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+    } else {
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+    }
+
+    /* =====================================
+       CANVAS ANIMATION
+    ===================================== */
+
     const canvas = document.getElementById("dataCanvas");
     const ctx = canvas.getContext("2d");
 
-    if (!ctx) return;
+    if (!ctx) {
+        return;
+    }
 
-    let width, height, particles = [], time = 0;
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let time = 0;
     let frameId = null;
     let lastFrame = 0;
 
-    const mouse = { x: -1000, y: -1000 };
-    const reduceMotion = window.matchMedia(
+    let particles = [];
+    let bars = [];
+
+    const mouse = {
+        x: -1000,
+        y: -1000
+    };
+
+    const reducedMotionQuery = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
-    ).matches;
+    );
 
-    function resize() {
-        const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Keep the background animated even when the device
+    // requests reduced motion.
+    const animationEnabled = true;
 
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    /* =====================================
+       RESIZE CANVAS
+    ===================================== */
+
+    function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
 
-        canvas.width = Math.floor(width * ratio);
-        canvas.height = Math.floor(height * ratio);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+
         canvas.style.width = width + "px";
         canvas.style.height = height + "px";
 
-        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const count = Math.min(
-            65, Math.max(28, Math.floor(width / 18))
+        createParticles();
+        createBars();
+    }
+
+    /* =====================================
+       CREATE GLOWING PARTICLES
+    ===================================== */
+
+    function createParticles() {
+        particles = [];
+
+        const particleCount = Math.min(
+            85,
+            Math.max(35, Math.floor(width / 15))
         );
 
-        particles = Array.from({ length: count }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            r: Math.random() * 1.8 + 0.7
-        }));
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: random(0, width),
+                y: random(0, height),
+
+                vx: random(-0.24, 0.24),
+                vy: random(-0.24, 0.24),
+
+                radius: random(1, 2.5),
+                phase: random(0, Math.PI * 2)
+            });
+        }
     }
+
+    /* =====================================
+       CREATE DATA CHART BARS
+    ===================================== */
+
+    function createBars() {
+        bars = [];
+
+        const count = Math.max(
+            9,
+            Math.floor(width / 100)
+        );
+
+        for (let i = 0; i < count; i++) {
+            bars.push({
+                x: (width / count) * i + 12,
+                height: random(25, 100),
+                phase: random(0, Math.PI * 2),
+                speed: random(0.5, 1.3)
+            });
+        }
+    }
+
+    /* =====================================
+       DRAW GRID
+    ===================================== */
 
     function drawGrid() {
-        ctx.strokeStyle = "rgba(0,160,255,0.07)";
-        ctx.lineWidth = 1;
+        const gap = 55;
 
-        for (let y = 35; y < height; y += 55) {
-            ctx.beginPath();
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.055)";
+
+        ctx.beginPath();
+
+        for (let x = 0; x < width; x += gap) {
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+        }
+
+        for (let y = 0; y < height; y += gap) {
             ctx.moveTo(0, y);
             ctx.lineTo(width, y);
-            ctx.stroke();
         }
+
+        ctx.stroke();
     }
+
+    /* =====================================
+       DRAW MOVING CHART BARS
+    ===================================== */
 
     function drawBars() {
-        const gap = Math.max(30, width / 35);
-        const baseline = height * 0.86;
+        const baseY = height * 0.88;
 
-        for (let x = 12; x < width; x += gap) {
-            const phase = x * 0.035 + time * 1.2;
-            const barHeight =
-                18 + (Math.sin(phase) + 1) * height * 0.065;
-
-            const gradient = ctx.createLinearGradient(
-                x, baseline - barHeight, x, baseline
+        bars.forEach((bar, index) => {
+            const movement = Math.sin(
+                time * bar.speed + bar.phase
             );
 
-            gradient.addColorStop(0, "rgba(0,220,255,0.35)");
-            gradient.addColorStop(1, "rgba(0,100,255,0.015)");
+            const barHeight = bar.height + movement * 22;
+            const x = bar.x;
+
+            const gradient = ctx.createLinearGradient(
+                0,
+                baseY - barHeight,
+                0,
+                baseY
+            );
+
+            gradient.addColorStop(
+                0,
+                "rgba(34, 211, 238, 0.42)"
+            );
+
+            gradient.addColorStop(
+                1,
+                "rgba(37, 99, 235, 0.015)"
+            );
 
             ctx.fillStyle = gradient;
-            ctx.fillRect(x, baseline - barHeight, 7, barHeight);
-        }
+
+            ctx.fillRect(
+                x,
+                baseY - barHeight,
+                8,
+                barHeight
+            );
+
+            ctx.fillStyle = "rgba(56, 189, 248, 0.65)";
+
+            ctx.fillRect(
+                x,
+                baseY - barHeight - 2,
+                8,
+                2
+            );
+        });
     }
 
+    /* =====================================
+       DRAW MOVING DATA WAVE
+    ===================================== */
+
     function drawWave() {
+        const waveY = height * 0.58;
+
         ctx.beginPath();
 
         for (let x = 0; x <= width; x += 5) {
             const y =
-                height * 0.63 +
-                Math.sin(x * 0.008 + time) * 22 +
-                Math.sin(x * 0.003 - time * 0.7) * 32;
+                waveY +
+                Math.sin(x * 0.008 + time) * 20 +
+                Math.sin(x * 0.018 - time * 1.4) * 9;
 
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+            if (x === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
         }
 
-        ctx.strokeStyle = "rgba(0,220,255,0.27)";
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.19)";
         ctx.lineWidth = 1.5;
         ctx.stroke();
+
+        ctx.lineTo(width, height);
+        ctx.lineTo(0, height);
+        ctx.closePath();
+
+        const gradient = ctx.createLinearGradient(
+            0,
+            waveY - 35,
+            0,
+            height
+        );
+
+        gradient.addColorStop(
+            0,
+            "rgba(34, 211, 238, 0.055)"
+        );
+
+        gradient.addColorStop(
+            1,
+            "rgba(34, 211, 238, 0)"
+        );
+
+        ctx.fillStyle = gradient;
+        ctx.fill();
     }
 
+    /* =====================================
+       DRAW MOVING NETWORK
+    ===================================== */
+
     function drawNetwork() {
+        const connectionDistance = 135;
+
         for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
+            const particle = particles[i];
 
-            p.x += p.vx;
-            p.y += p.vy;
+            // Move particles continuously.
+            particle.x += particle.vx;
+            particle.y += particle.vy;
 
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
+            // Add subtle floating motion.
+            particle.x += Math.sin(
+                time + particle.phase
+            ) * 0.12;
 
-            const dx = mouse.x - p.x;
-            const dy = mouse.y - p.y;
-            const distanceToMouse = Math.hypot(dx, dy);
+            particle.y += Math.cos(
+                time * 0.8 + particle.phase
+            ) * 0.12;
 
-            if (distanceToMouse < 100 && distanceToMouse > 0) {
-                p.x -= dx / distanceToMouse * 0.35;
-                p.y -= dy / distanceToMouse * 0.35;
-            }
+            // Wrap particles around screen edges.
+            if (particle.x < -10) particle.x = width + 10;
+            if (particle.x > width + 10) particle.x = -10;
 
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = "#00cfff";
-            ctx.fill();
+            if (particle.y < -10) particle.y = height + 10;
+            if (particle.y > height + 10) particle.y = -10;
 
+            // Connect nearby particles.
             for (let j = i + 1; j < particles.length; j++) {
-                const q = particles[j];
-                const distance = Math.hypot(p.x - q.x, p.y - q.y);
+                const other = particles[j];
 
-                if (distance < 125) {
+                const dx = particle.x - other.x;
+                const dy = particle.y - other.y;
+
+                const distance = Math.sqrt(
+                    dx * dx + dy * dy
+                );
+
+                if (distance < connectionDistance) {
+                    const opacity =
+                        (1 - distance / connectionDistance) * 0.24;
+
                     ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(q.x, q.y);
+
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(other.x, other.y);
 
                     ctx.strokeStyle =
-                        "rgba(0,170,255," +
-                        (1 - distance / 125) * 0.36 + ")";
+                        "rgba(56, 189, 248, " +
+                        opacity +
+                        ")";
 
-                    ctx.lineWidth = 0.8;
+                    ctx.lineWidth = 0.7;
                     ctx.stroke();
                 }
             }
 
-            if (distanceToMouse < 140) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(mouse.x, mouse.y);
-                ctx.strokeStyle = "rgba(0,229,255,0.35)";
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
+            // Draw glowing nodes.
+            const glow = 0.65 +
+                Math.sin(time * 2 + particle.phase) * 0.25;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                particle.x,
+                particle.y,
+                particle.radius + glow * 0.5,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(103, 232, 249, " + glow + ")";
+
+            ctx.shadowBlur = 9;
+            ctx.shadowColor = "#22d3ee";
+
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
         }
     }
+
+    /* =====================================
+       MAIN ANIMATION LOOP
+    ===================================== */
 
     function draw(timestamp) {
         frameId = null;
 
-        if (document.hidden) return;
+        // Pause only when the browser tab is hidden.
+        if (document.hidden) {
+            return;
+        }
 
-        if (timestamp - lastFrame < 30) {
+        // Keep animation smooth without overloading
+        // the browser with excessive redraws.
+        if (timestamp - lastFrame < 25) {
             frameId = requestAnimationFrame(draw);
             return;
         }
 
         lastFrame = timestamp;
-        time += 0.018;
+
+        // This value changes every frame.
+        // It drives the movement of charts and waves.
+        time += 0.025;
 
         ctx.clearRect(0, 0, width, height);
 
@@ -716,52 +2112,84 @@ footer {
         drawWave();
         drawNetwork();
 
-        if (!reduceMotion) {
-            frameId = requestAnimationFrame(draw);
-        }
+        // Always request another frame.
+        // This keeps the background moving.
+        frameId = requestAnimationFrame(draw);
     }
 
-    function start() {
+    /* =====================================
+       START / STOP ANIMATION
+    ===================================== */
+
+    function startAnimation() {
         if (frameId !== null) {
             cancelAnimationFrame(frameId);
+            frameId = null;
         }
 
         lastFrame = 0;
         frameId = requestAnimationFrame(draw);
     }
 
-    window.addEventListener("resize", () => {
-        resize();
-
-        if (reduceMotion) draw(0);
-        else start();
-    });
-
-    window.addEventListener("pointermove", event => {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
-    }, { passive: true });
-
-    window.addEventListener("pointerleave", () => {
-        mouse.x = -1000;
-        mouse.y = -1000;
-    });
-
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-            if (frameId !== null) {
-                cancelAnimationFrame(frameId);
-                frameId = null;
-            }
-        } else if (!reduceMotion) {
-            start();
+    function stopAnimation() {
+        if (frameId !== null) {
+            cancelAnimationFrame(frameId);
+            frameId = null;
         }
-    });
+    }
 
-    resize();
+    /* =====================================
+       MOUSE INTERACTION
+    ===================================== */
 
-    if (reduceMotion) draw(0);
-    else start();
+    window.addEventListener(
+        "pointermove",
+        event => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        },
+        { passive: true }
+    );
+
+    window.addEventListener(
+        "pointerleave",
+        () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        },
+        { passive: true }
+    );
+
+    /* =====================================
+       PAGE VISIBILITY
+    ===================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+            if (document.hidden) {
+                stopAnimation();
+            } else if (animationEnabled) {
+                startAnimation();
+            }
+        }
+    );
+
+    /* =====================================
+       INITIALIZE
+    ===================================== */
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas,
+        { passive: true }
+    );
+
+    resizeCanvas();
+
+    // Start the animation immediately.
+    startAnimation();
+
 })();
 </script>
 
