@@ -3,155 +3,407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Manik Patil | Data Analyst Portfolio</title>
+
+<meta name="description"
+content="Manik Patil's portfolio showcasing Data Analytics, SQL, Python, Power BI, Tableau and business intelligence projects.">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-body{font-family:Arial,sans-serif;background:#0b1120;color:#e5e7eb;line-height:1.7}
-header{background:#111827;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-header h2{color:#38bdf8}
-nav a{color:white;text-decoration:none;margin:0 8px}
-nav a:hover{color:#38bdf8}
-section{padding:55px 8%}
-.hero{min-height:380px;display:flex;flex-direction:column;justify-content:center}
-.hero h1{font-size:42px;color:white;margin:10px 0}
-.hero h1 span{color:#38bdf8}
-.hero h3{color:#94a3b8;font-size:21px}
-.hero p{max-width:720px;margin:18px 0}
-.button{display:inline-block;background:#0284c7;color:white;padding:10px 18px;margin:8px 8px 0 0;border-radius:6px;text-decoration:none}
-.button:hover{background:#0369a1}
-.section-title{font-size:29px;color:#38bdf8;margin-bottom:22px}
-.card-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.card{background:#172033;border:1px solid #293548;padding:22px;border-radius:10px}
-.card h3{color:#7dd3fc;margin-bottom:10px}
-.skills{display:flex;flex-wrap:wrap;gap:12px}
-.skill{background:#172033;border:1px solid #38bdf8;padding:7px 15px;border-radius:20px}
-a{overflow-wrap:anywhere}
-footer{background:#111827;text-align:center;padding:24px}
-@media(max-width:600px){.hero h1{font-size:32px}nav a{display:inline-block;margin:5px}}
+:root {
+    --bg: #020817;
+    --card: rgba(5, 22, 45, 0.88);
+    --blue: #079cff;
+    --cyan: #00e5ff;
+    --text: #f3f8ff;
+    --muted: #b8c9df;
+    --border: rgba(0, 174, 255, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Animated background canvas */
+#dataCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 15% 25%,
+        rgba(0, 85, 200, 0.22), transparent 45%),
+        radial-gradient(ellipse at 85% 55%,
+        rgba(0, 210, 255, 0.12), transparent 42%),
+        linear-gradient(135deg, #020617, #06152e, #010611);
+    background-size: 200% 200%;
+    animation: backgroundShift 18s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Navigation */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(2, 8, 23, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    max-width: 1150px;
+    margin: auto;
+    padding: 15px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--cyan);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: #dceaff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--cyan);
+}
+
+/* Hero section */
+.hero {
+    min-height: 570px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: auto;
+    padding: 90px 25px 70px;
+    position: relative;
+}
+
+.eyebrow {
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: var(--cyan);
+    text-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+}
+
+.hero h2 {
+    font-size: clamp(20px, 3vw, 28px);
+    color: #d7e8ff;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 650px;
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 27px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 20px;
+    border: 1px solid var(--blue);
+    border-radius: 7px;
+    color: white;
+    text-decoration: none;
+    background: rgba(0, 132, 255, 0.12);
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.btn.primary {
+    background: linear-gradient(110deg, #087cff, #00b8ff);
+    border-color: transparent;
+    font-weight: bold;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(0, 174, 255, 0.35);
+}
+
+/* Sections */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px;
+}
+
+section.content-section {
+    padding: 32px 0;
+    scroll-margin-top: 80px;
+}
+
+.section-title {
+    font-size: 30px;
+    margin-bottom: 22px;
+    color: var(--cyan);
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 27px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(8px);
+}
+
+.card p {
+    color: var(--muted);
+}
+
+.card h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.card h3 span {
+    color: var(--cyan);
+}
+
+/* Skills */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill {
+    padding: 7px 14px;
+    border: 1px solid var(--blue);
+    border-radius: 25px;
+    background: rgba(0, 140, 255, 0.09);
+    color: #e4f5ff;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.skill:hover {
+    background: rgba(0, 174, 255, 0.22);
+    transform: translateY(-3px);
+    box-shadow: 0 0 14px rgba(0, 174, 255, 0.22);
+}
+
+/* Projects grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyan);
+}
+
+.project-card p {
+    margin-bottom: 18px;
+    flex-grow: 1;
+}
+
+.project-card .btn {
+    align-self: flex-start;
+}
+
+/* Certificates */
+.certificate-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.certificate-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.certificate-item p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Contact */
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 28px 15px;
+    color: #94aac5;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* Scroll reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 480px;
+        padding-top: 65px;
+    }
+
+    .project-grid,
+    .certificate-list {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 </style>
 </head>
+
 <body>
 
+<div class="background-glow"></div>
+<canvas id="dataCanvas" aria-hidden="true"></canvas>
+
 <header>
-<h2>Manik Patil</h2>
-<nav>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#certificates">Certificates</a>
-<a href="#contact">Contact</a>
-</nav>
+    <div class="navbar">
+        <div class="logo">Manik <span>Patil</span></div>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
 </header>
 
-<section class="hero">
-<h3>Hello, I'm</h3>
-<h1>Manik <span>Dnyaneshwar Patil</span></h1>
-<h3>Aspiring Data Analyst</h3>
-<p>I am a B.Sc. graduate developing my skills in data analytics, data visualization and business reporting. I enjoy using data to discover insights and support better decisions.</p>
-<div>
-<a class="button" href="#projects">Explore My Projects</a>
-<a class="button" href="https://github.com/manikpatil-1415" target="_blank">GitHub Profile</a>
-<a class="button" href="https://www.linkedin.com/in/manik-patil1415" target="_blank">LinkedIn</a>
-</div>
-</section>
+<main>
 
-<section id="about">
-<h2 class="section-title">About Me</h2>
-<div class="card">
-<p>I am a recent Bachelor of Science graduate interested in Data Analytics and Business Analytics. I have completed training in Data Analytics and Business Analytics with AI/ML at Naresh IT, Hyderabad.</p>
-<p>My learning focuses on SQL, Python, Excel, Power BI, Tableau, data cleaning, visualization and business insights.</p>
-</div>
-</section>
+<section class="hero" id="home">
+    <div class="eyebrow">Welcome to my portfolio</div>
 
-<section id="skills">
-<h2 class="section-title">Technical Skills</h2>
-<div class="skills">
-<span class="skill">SQL</span>
-<span class="skill">MySQL</span>
-<span class="skill">Python</span>
-<span class="skill">Pandas</span>
-<span class="skill">NumPy</span>
-<span class="skill">Matplotlib</span>
-<span class="skill">Seaborn</span>
-<span class="skill">Excel</span>
-<span class="skill">Power BI</span>
-<span class="skill">DAX</span>
-<span class="skill">Tableau</span>
-<span class="skill">Statistics</span>
-<span class="skill">Data Cleaning</span>
-<span class="skill">Data Visualization</span>
-</div>
-</section>
+    <h1>Hi, I'm<br><span>Manik Patil</span></h1>
 
-<section id="projects">
-<h2 class="section-title">My Projects</h2>
-<div class="card-container">
-<div class="card">
-<h3>Sales Data Analytics Project</h3>
-<p>Sales analysis using Excel, MySQL, Power BI and DAX.</p>
-<a class="button" href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project" target="_blank">View Project</a>
-</div>
-<div class="card">
-<h3>Power BI Dashboard Design</h3>
-<p>Dashboard for global finance and sales performance analysis.</p>
-<a class="button" href="https://github.com/manikpatil-1415/Dashboard-Design" target="_blank">View Project</a>
-</div>
-<div class="card">
-<h3>Data Cleaning and Preprocessing</h3>
-<p>Data cleaning and preprocessing using Python and Pandas.</p>
-<a class="button" href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing" target="_blank">View Project</a>
-</div>
-<div class="card">
-<h3>Customer Churn Prediction</h3>
-<p>Customer churn prediction project using Python and machine learning.</p>
-<a class="button" href="https://github.com/manikpatil-1415/Customer-Churn-Prediction" target="_blank">View Project</a>
-</div>
-<div class="card">
-<h3>SQL Data Analysis</h3>
-<p>SQL queries and data analysis practice.</p>
-<a class="button" href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis" target="_blank">View Project</a>
-</div>
-</div>
-</section>
+    <h2>Data Analyst | Business Analyst</h2>
 
-<section id="certificates">
-<h2 class="section-title">Certificates & Training</h2>
-<div class="card-container">
-<div class="card">
-<h3>SQL (Advanced)</h3>
-<p>HackerRank</p>
-<p>August 2026</p>
-</div>
-<div class="card">
-<h3>Deloitte Australia Data Analytics Job Simulation</h3>
-<p>Forage</p>
-<p>August 2026</p>
-</div>
-<div class="card">
-<h3>AI Tools & Claude Workshop</h3>
-<p>be10x</p>
-<p>September 2026</p>
-</div>
-<div class="card">
-<h3>Data Analytics Training</h3>
-<p>Naresh IT, Hyderabad</p>
-<p>Data Analytics, Business Analytics and AI/ML</p>
-</div>
-</div>
-</section>
+    <p>
+        Turning Data into Insights for Better Decisions.
+        I enjoy exploring data, finding meaningful patterns,
+        and presenting insights through clear visualizations.
+    </p>
 
-<section id="contact">
-<h2 class="section-title">Contact Me</h2>
-<div class="card">
-<p><strong>Email:</strong> <a href="mailto:manikpatilmp1415@gmail.com">manikpatilmp1415@gmail.com</a></p>
-<p><strong>GitHub:</strong> <a href="https://github.com/manikpatil-1415">github.com/manikpatil-1415</a></p>
-<p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/manik-patil1415">View LinkedIn Profile</a></p>
-</div>
-</section>
-
-<footer>
-<p>© 2026 Manik Dnyaneshwar Patil | Data Analyst Portfolio</p>
-</footer>
-
-</body>
-</html>
+    <div class="
