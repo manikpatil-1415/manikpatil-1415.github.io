@@ -1,2194 +1,856 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manik Patil | Data Analyst & Business Analytics</title>
+  <meta name="description" content="Portfolio of Manik Patil - Data Analyst specializing in SQL, Python, Power BI, Tableau, and Business Intelligence." />
 
-<title>Manik Patil | Data Analyst Portfolio</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
 
-<meta name="description"
-content="Manik Patil's Data Analyst Portfolio featuring SQL, Python, Excel, Power BI, Tableau, data analytics projects and dashboards.">
-
-<meta name="theme-color" content="#050816">
-
-<style>
-/* =========================================
-   GLOBAL SETTINGS
-========================================= */
-
-:root {
-    --bg: #050816;
-    --card: rgba(12, 23, 48, 0.78);
-    --blue: #38bdf8;
-    --cyan: #22d3ee;
-    --purple: #818cf8;
-    --text: #f1f5f9;
-    --muted: #a8b7ce;
-    --border: rgba(56, 189, 248, 0.22);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 85px;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-
-.container {
-    width: min(1120px, 90%);
-    margin: auto;
-}
-
-section {
-    padding: 85px 0;
-    position: relative;
-    z-index: 2;
-}
-
-.section-title {
-    font-size: clamp(30px, 5vw, 43px);
-    text-align: center;
-    margin-bottom: 12px;
-}
-
-.section-title span {
-    color: var(--cyan);
-}
-
-.section-subtitle {
-    color: var(--muted);
-    text-align: center;
-    max-width: 650px;
-    margin: 0 auto 42px;
-}
-
-/* =========================================
-   ANIMATED BACKGROUND
-========================================= */
-
-.background-glow {
-    position: fixed;
-    inset: -20%;
-    z-index: -3;
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 15% 25%,
-            rgba(37, 99, 235, 0.22),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 85% 35%,
-            rgba(8, 145, 178, 0.17),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(79, 70, 229, 0.18),
-            transparent 38%
-        );
-
-    animation: glowMove 12s ease-in-out infinite alternate;
-}
-
-@keyframes glowMove {
-    0% {
-        transform: translate3d(-2%, -1%, 0) scale(1);
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              dark: '#0f0f11',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Syne"', 'sans-serif'],
+          }
+        }
+      }
     }
+  </script>
 
-    50% {
-        transform: translate3d(2%, 2%, 0) scale(1.05);
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
     }
-
-    100% {
-        transform: translate3d(-1%, 3%, 0) scale(1.02);
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
     }
-}
-
-#dataCanvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    pointer-events: none;
-    opacity: 0.85;
-}
-
-.background-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-
-    background-image:
-        linear-gradient(
-            rgba(56, 189, 248, 0.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(56, 189, 248, 0.035) 1px,
-            transparent 1px
-        );
-
-    background-size: 55px 55px;
-
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
-}
-
-/* =========================================
-   NAVIGATION
-========================================= */
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
-    background: rgba(5, 8, 22, 0.82);
-    backdrop-filter: blur(18px);
-
-    border-bottom: 1px solid var(--border);
-}
-
-.navbar {
-    min-height: 75px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    font-size: 23px;
-    font-weight: 800;
-    white-space: nowrap;
-}
-
-.logo span {
-    color: var(--cyan);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    list-style: none;
-}
-
-.nav-links a {
-    font-size: 14px;
-    color: var(--muted);
-    transition: color 0.25s ease;
-}
-
-.nav-links a:hover {
-    color: var(--cyan);
-}
-
-.menu-button {
-    display: none;
-    border: 1px solid var(--border);
-    background: rgba(56, 189, 248, 0.08);
-    color: white;
-    font-size: 22px;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* =========================================
-   HERO
-========================================= */
-
-.hero {
-    min-height: 86vh;
-    display: flex;
-    align-items: center;
-    padding: 95px 0 80px;
-}
-
-.hero-content {
-    max-width: 850px;
-}
-
-.availability {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 8px 14px;
-    border: 1px solid var(--border);
-    border-radius: 50px;
-
-    background: rgba(8, 145, 178, 0.09);
-    color: #a5f3fc;
-    font-size: 13px;
-
-    margin-bottom: 26px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 12px #4ade80;
-
-    animation: pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
     }
-
-    50% {
-        opacity: 0.45;
-        transform: scale(0.75);
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e11d48;
     }
-}
-
-.hero h1 {
-    font-size: clamp(40px, 7vw, 76px);
-    line-height: 1.12;
-    letter-spacing: -2px;
-    margin-bottom: 18px;
-}
-
-.hero h1 span {
-    color: var(--cyan);
-    text-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
-}
-
-.hero h2 {
-    font-size: clamp(21px, 3vw, 30px);
-    color: #cbd5e1;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
-
-.hero-description {
-    max-width: 680px;
-    color: var(--muted);
-    font-size: 17px;
-    margin-bottom: 30px;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-
-    padding: 12px 22px;
-    border-radius: 9px;
-    border: 1px solid var(--border);
-
-    font-size: 14px;
-    font-weight: 700;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
-}
-
-.btn:hover {
-    transform: translateY(-4px);
-}
-
-.btn-primary {
-    color: #03101c;
-    background: linear-gradient(
-        110deg,
-        var(--cyan),
-        var(--blue)
-    );
-
-    box-shadow: 0 0 25px rgba(34, 211, 238, 0.16);
-}
-
-.btn-primary:hover {
-    box-shadow: 0 0 35px rgba(34, 211, 238, 0.35);
-}
-
-.btn-outline {
-    color: var(--text);
-    background: rgba(15, 23, 42, 0.65);
-}
-
-.btn-outline:hover {
-    background: rgba(56, 189, 248, 0.12);
-}
-
-.hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-    max-width: 650px;
-    margin-top: 48px;
-}
-
-.stat {
-    padding: 18px;
-    border: 1px solid var(--border);
-    background: rgba(12, 23, 48, 0.62);
-    border-radius: 12px;
-}
-
-.stat h3 {
-    font-size: 27px;
-    color: var(--cyan);
-}
-
-.stat p {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-/* =========================================
-   COMMON CARDS
-========================================= */
-
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    padding: 25px;
-
-    backdrop-filter: blur(12px);
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(34, 211, 238, 0.65);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-}
-
-.card h3 {
-    font-size: 20px;
-    margin-bottom: 12px;
-}
-
-.card p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-/* =========================================
-   ABOUT
-========================================= */
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 25px;
-    align-items: stretch;
-}
-
-.about-text p {
-    margin-bottom: 15px;
-    color: var(--muted);
-}
-
-.about-highlight {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 18px;
-}
-
-.highlight-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 13px;
-}
-
-.highlight-icon {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 10px;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid var(--border);
-    color: var(--cyan);
-    font-size: 20px;
-}
-
-.highlight-item h4 {
-    margin-bottom: 3px;
-}
-
-.highlight-item p {
-    font-size: 13px;
-}
-
-/* =========================================
-   SKILLS
-========================================= */
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-}
-
-.skill-card h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.skill-icon {
-    font-size: 23px;
-}
-
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 17px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 6px 11px;
-
-    border-radius: 7px;
-    border: 1px solid rgba(56, 189, 248, 0.18);
-
-    background: rgba(56, 189, 248, 0.07);
-    color: #c6e8fa;
-
-    font-size: 12px;
-}
-
-/* =========================================
-   PROJECTS
-========================================= */
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.project-card {
-    display: flex;
-    flex-direction: column;
-    min-height: 270px;
-}
-
-.project-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.project-icon {
-    width: 48px;
-    height: 48px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 12px;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid var(--border);
-    font-size: 23px;
-}
-
-.project-type {
-    font-size: 11px;
-    color: var(--cyan);
-    border: 1px solid var(--border);
-    padding: 5px 9px;
-    border-radius: 20px;
-}
-
-.project-card p {
-    margin-bottom: 17px;
-}
-
-.project-card .skill-tags {
-    margin-top: auto;
-    margin-bottom: 18px;
-}
-
-.project-link {
-    color: var(--cyan);
-    font-size: 14px;
-    font-weight: 700;
-    display: inline-block;
-    width: fit-content;
-}
-
-.project-link:hover {
-    color: white;
-}
-
-/* =========================================
-   CERTIFICATES
-========================================= */
-
-.certificates-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.certificate-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 17px;
-}
-
-.certificate-icon {
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 13px;
-    background: rgba(129, 140, 248, 0.12);
-    border: 1px solid rgba(129, 140, 248, 0.35);
-
-    font-size: 24px;
-}
-
-.certificate-card h3 {
-    font-size: 17px;
-}
-
-.certificate-card .issuer {
-    color: var(--cyan);
-    font-size: 13px;
-    margin-bottom: 7px;
-}
-
-.certificate-card p {
-    font-size: 13px;
-}
-
-/* =========================================
-   EDUCATION
-========================================= */
-
-.education-card {
-    max-width: 800px;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.education-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4px;
-    background: linear-gradient(
-        to bottom,
-        var(--cyan),
-        var(--purple)
-    );
-}
-
-.education-card h3 {
-    font-size: 22px;
-}
-
-.education-card .degree {
-    color: var(--cyan);
-    margin: 5px 0 10px;
-}
-
-.education-card p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-/* =========================================
-   CONTACT
-========================================= */
-
-.contact-card {
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-}
-
-.contact-card > p {
-    color: var(--muted);
-    margin-bottom: 25px;
-}
-
-.contact-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    padding: 11px 15px;
-
-    background: rgba(56, 189, 248, 0.07);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-
-    font-size: 13px;
-    transition: 0.25s ease;
-}
-
-.contact-link:hover {
-    background: rgba(34, 211, 238, 0.15);
-    border-color: var(--cyan);
-}
-
-/* =========================================
-   FOOTER
-========================================= */
-
-footer {
-    border-top: 1px solid var(--border);
-    padding: 25px 0;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    position: relative;
-    z-index: 2;
-}
-
-footer span {
-    color: var(--cyan);
-}
-
-/* =========================================
-   SCROLL REVEAL
-========================================= */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(22px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* =========================================
-   RESPONSIVE DESIGN
-========================================= */
-
-@media (max-width: 850px) {
-    .nav-links {
-        gap: 14px;
-    }
-
-    .nav-links a {
-        font-size: 12px;
-    }
-
-    .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 650px) {
-    .navbar {
-        min-height: 68px;
-    }
-
-    .menu-button {
-        display: block;
-    }
-
-    .nav-links {
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-
-        padding: 10px 5%;
-        background: rgba(5, 8, 22, 0.97);
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links a {
-        display: block;
-        padding: 12px 0;
-        font-size: 14px;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 85px 0 65px;
-    }
-
-    .hero h1 {
-        letter-spacing: -1px;
-    }
-
-    .hero-description {
-        font-size: 15px;
-    }
-
-    .hero-stats {
-        gap: 9px;
-    }
-
-    .stat {
-        padding: 13px 9px;
-    }
-
-    .stat h3 {
-        font-size: 22px;
-    }
-
-    .stat p {
-        font-size: 10px;
-    }
-
-    section {
-        padding: 65px 0;
-    }
-
-    .skills-grid,
-    .projects-grid,
-    .certificates-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        padding: 21px;
-    }
-
-    .hero-buttons .btn {
-        flex: 1;
-        min-width: 145px;
-    }
-
-    .contact-links {
-        flex-direction: column;
-    }
-
-    .contact-link {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero-stats {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  </style>
 </head>
+<body class="bg-[#F8FAFC] text-neutral-900 antialiased font-sans selection:bg-brand-600 selection:text-white">
 
-<body>
+  <!-- TOP NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#home" class="text-2xl font-black tracking-tight flex items-center gap-1 font-display">
+        <span>Manik</span><span class="text-brand-600">.</span>
+      </a>
 
-<div class="background-glow"></div>
-<div class="background-grid"></div>
-<canvas id="dataCanvas" aria-hidden="true"></canvas>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-neutral-600">
+        <a href="#home" class="hover:text-brand-600 transition-colors">Home</a>
+        <a href="#about" class="hover:text-brand-600 transition-colors">About</a>
+        <a href="#expertise" class="hover:text-brand-600 transition-colors">Expertise</a>
+        <a href="#skills" class="hover:text-brand-600 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-brand-600 transition-colors">Projects</a>
+        <a href="#credentials" class="hover:text-brand-600 transition-colors">Certifications</a>
+      </nav>
 
-<!-- =========================================
-     NAVIGATION
-========================================= -->
-
-<header>
-    <nav class="navbar container">
-
-        <a href="#home" class="logo">
-            MANIK<span>.</span>
+      <!-- Desktop Contact CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="#contact" class="px-6 py-2.5 rounded-full bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition shadow-sm hover:shadow-brand-600/20">
+          Contact Me
         </a>
+      </div>
 
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Open navigation menu"
-            aria-expanded="false">
-            ☰
-        </button>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#certificates">Certificates</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-    </nav>
-</header>
-
-<main>
-
-<!-- =========================================
-     HERO SECTION
-========================================= -->
-
-<section class="hero" id="home">
-
-    <div class="container">
-
-        <div class="hero-content">
-
-            <div class="availability">
-                <span class="status-dot"></span>
-                Open to Entry-Level Opportunities
-            </div>
-
-            <h1>
-                Hi, I'm <span>Manik Patil</span>
-            </h1>
-
-            <h2>Data Analyst | Business Analytics</h2>
-
-            <p class="hero-description">
-                I turn raw data into meaningful insights using
-                SQL, Python, Excel, Power BI and Tableau.
-                I enjoy exploring datasets, building dashboards
-                and helping businesses make data-driven decisions.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="#projects" class="btn btn-primary">
-                    Explore My Projects ↗
-                </a>
-
-                <a
-                    href="https://github.com/manikpatil-1415"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-outline">
-                    GitHub Profile ↗
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/manik-patil1415"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-outline">
-                    LinkedIn ↗
-                </a>
-
-            </div>
-
-            <div class="hero-stats">
-
-                <div class="stat">
-                    <h3>SQL</h3>
-                    <p>Data Analysis</p>
-                </div>
-
-                <div class="stat">
-                    <h3>Python</h3>
-                    <p>Data Processing</p>
-                </div>
-
-                <div class="stat">
-                    <h3>BI</h3>
-                    <p>Dashboards & Insights</p>
-                </div>
-
-            </div>
-
-        </div>
-
+      <!-- Mobile Hamburger Button -->
+      <button id="menu-btn" class="md:hidden p-2 text-neutral-700 hover:text-brand-600" aria-label="Toggle Navigation">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
     </div>
 
-</section>
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-neutral-200 px-6 py-4 space-y-3 font-semibold text-neutral-700">
+      <a href="#home" class="block hover:text-brand-600">Home</a>
+      <a href="#about" class="block hover:text-brand-600">About</a>
+      <a href="#expertise" class="block hover:text-brand-600">Expertise</a>
+      <a href="#skills" class="block hover:text-brand-600">Skills</a>
+      <a href="#projects" class="block hover:text-brand-600">Projects</a>
+      <a href="#credentials" class="block hover:text-brand-600">Certifications</a>
+      <a href="#contact" class="block text-brand-600 font-bold">Contact Me ↗</a>
+    </div>
+  </header>
 
-<!-- =========================================
-     ABOUT SECTION
-========================================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-24">
 
-<section id="about">
+    <!-- HERO SECTION -->
+    <section id="home" class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#E11D48] via-[#E11D48] to-[#C0103A] text-white p-8 sm:p-14 lg:p-16 shadow-2xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+        
+        <!-- Hero Text & CTAs -->
+        <div class="lg:col-span-7 space-y-6 pb-4">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Open to Entry-Level Opportunities
+          </div>
 
-    <div class="container">
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] font-display">
+            Hi, I'm a <br />
+            <span class="text-white drop-shadow-sm">Data Analyst</span>
+          </h1>
 
-        <h2 class="section-title">
-            About <span>Me</span>
-        </h2>
+          <p class="text-base sm:text-lg text-white/90 font-normal max-w-xl leading-relaxed">
+            I turn raw data into meaningful business insights using <span class="font-semibold text-white">SQL, Python, Excel, Power BI, and Tableau</span>. I enjoy exploring datasets, building dashboards, and helping businesses make data-driven decisions.
+          </p>
 
-        <p class="section-subtitle">
-            A curious learner passionate about data,
-            analytics and solving business problems.
-        </p>
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#projects" class="px-8 py-4 rounded-full bg-neutral-900 text-white font-bold text-sm sm:text-base hover:bg-black transition-all shadow-xl hover:-translate-y-0.5">
+              View My Work
+            </a>
+            <a href="#contact" class="px-8 py-4 rounded-full border-2 border-white text-white font-bold text-sm sm:text-base hover:bg-white hover:text-brand-600 transition-all">
+              Contact Me
+            </a>
+          </div>
 
-        <div class="about-grid">
-
-            <div class="card about-text reveal">
-
-                <h3>My Journey</h3>
-
-                <p>
-                    I am a B.Sc. graduate with training in
-                    Data Analytics and Business Analytics.
-                    My goal is to build a career as a Data Analyst
-                    and use data to discover useful business insights.
-                </p>
-
-                <p>
-                    I have worked with SQL, Python, Excel,
-                    Power BI and Tableau through learning,
-                    analytical exercises and projects.
-                </p>
-
-                <p>
-                    I am continuously improving my technical
-                    skills, analytical thinking, data visualization
-                    and ability to communicate findings clearly.
-                </p>
-
+          <!-- Bottom Stat Strip -->
+          <div class="pt-8 border-t border-white/20 grid grid-cols-3 gap-4 max-w-lg">
+            <div>
+              <div class="text-2xl sm:text-3xl font-black font-display">SQL</div>
+              <div class="text-xs sm:text-sm text-white/80">Queries & CTEs</div>
             </div>
-
-            <div class="card about-highlight reveal">
-
-                <div class="highlight-item">
-
-                    <div class="highlight-icon">📊</div>
-
-                    <div>
-                        <h4>Data Analysis</h4>
-                        <p>
-                            Explore, clean and analyze data
-                            to identify meaningful patterns.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="highlight-item">
-
-                    <div class="highlight-icon">📈</div>
-
-                    <div>
-                        <h4>Data Visualization</h4>
-                        <p>
-                            Build informative dashboards
-                            and present key metrics.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="highlight-item">
-
-                    <div class="highlight-icon">💡</div>
-
-                    <div>
-                        <h4>Continuous Learning</h4>
-                        <p>
-                            Improve analytical and technical
-                            skills through hands-on practice.
-                        </p>
-                    </div>
-
-                </div>
-
+            <div>
+              <div class="text-2xl sm:text-3xl font-black font-display">BI</div>
+              <div class="text-xs sm:text-sm text-white/80">Dashboards & DAX</div>
             </div>
-
+            <div>
+              <div class="text-2xl sm:text-3xl font-black font-display">Python</div>
+              <div class="text-xs sm:text-sm text-white/80">EDA & Pipelines</div>
+            </div>
+          </div>
         </div>
 
-    </div>
+        <!-- Hero Photo Container -->
+        <div class="lg:col-span-5 relative flex justify-center items-end self-end pt-6 lg:pt-0">
+          <div class="relative w-full max-w-sm sm:max-w-md flex flex-col items-center">
+            
+            <!-- Soft Ambient Background Glow -->
+            <div class="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-90 -z-10"></div>
 
-</section>
+            <!-- Profile Image (Loads profile.png, falls back to your GitHub avatar automatically) -->
+            <img 
+              src="profile.png" 
+              onerror="this.onerror=null; this.src='https://github.com/manikpatil-1415.png';"
+              alt="Manik Patil" 
+              class="relative z-10 w-full h-auto max-h-[460px] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:scale-[1.02]"
+            />
 
-<!-- =========================================
-     SKILLS SECTION
-========================================= -->
-
-<section id="skills">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Technical <span>Skills</span>
-        </h2>
-
-        <p class="section-subtitle">
-            Tools and technologies used for data analysis,
-            reporting and visualization.
-        </p>
-
-        <div class="skills-grid">
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">🗄️</span>
-                    SQL & Databases
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">SQL</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">Joins</span>
-                    <span class="tag">CTEs</span>
-                    <span class="tag">Subqueries</span>
-                    <span class="tag">Window Functions</span>
-                    <span class="tag">Aggregations</span>
+            <!-- Floating Badge Card -->
+            <div class="relative sm:absolute sm:-bottom-4 z-20 w-full sm:w-[94%] bg-white/95 backdrop-blur-md text-neutral-900 rounded-2xl p-4 shadow-2xl border border-white/50 flex items-center justify-between mt-4 sm:mt-0">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 font-bold text-lg">
+                  📊
                 </div>
-
-            </div>
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">🐍</span>
-                    Python
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">Matplotlib</span>
-                    <span class="tag">Seaborn</span>
-                    <span class="tag">Data Cleaning</span>
-                </div>
-
-            </div>
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">📊</span>
-                    Business Intelligence
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">Power BI</span>
-                    <span class="tag">DAX</span>
-                    <span class="tag">Power Query</span>
-                    <span class="tag">Tableau</span>
-                    <span class="tag">Dashboards</span>
-                </div>
-
-            </div>
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">📑</span>
-                    Microsoft Excel
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">Data Cleaning</span>
-                    <span class="tag">Pivot Tables</span>
-                    <span class="tag">Charts</span>
-                    <span class="tag">Formulas</span>
-                    <span class="tag">Reporting</span>
-                </div>
-
-            </div>
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">📐</span>
-                    Analytical Skills
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">Statistics</span>
-                    <span class="tag">EDA</span>
-                    <span class="tag">Data Interpretation</span>
-                    <span class="tag">Business Insights</span>
-                    <span class="tag">Problem Solving</span>
-                </div>
-
-            </div>
-
-            <div class="card skill-card reveal">
-
-                <h3>
-                    <span class="skill-icon">🤖</span>
-                    Additional Knowledge
-                </h3>
-
-                <div class="skill-tags">
-                    <span class="tag">AI/ML Fundamentals</span>
-                    <span class="tag">GitHub</span>
-                    <span class="tag">Google Colab</span>
-                    <span class="tag">Data Storytelling</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================
-     PROJECTS SECTION
-========================================= -->
-
-<section id="projects">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Featured <span>Projects</span>
-        </h2>
-
-        <p class="section-subtitle">
-            Explore my data analysis, dashboarding,
-            data preparation and machine learning work.
-        </p>
-
-        <div class="projects-grid">
-
-            <!-- Project 1 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">🗄️</div>
-
-                    <span class="project-type">
-                        SQL
-                    </span>
-
-                </div>
-
-                <h3>SQL Data Analysis</h3>
-
-                <p>
-                    SQL-based data analysis practice using
-                    queries, aggregations and data exploration
-                    to answer analytical questions.
-                </p>
-
-                <div class="skill-tags">
-                    <span class="tag">SQL</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">Data Analysis</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on GitHub ↗
-                </a>
-
-            </article>
-
-            <!-- Project 2 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">📊</div>
-
-                    <span class="project-type">
-                        Power BI
-                    </span>
-
-                </div>
-
-                <h3>Dashboard Design</h3>
-
-                <p>
-                    An interactive dashboard project focused
-                    on presenting financial and sales performance
-                    through visualizations and business metrics.
-                </p>
-
-                <div class="skill-tags">
-                    <span class="tag">Power BI</span>
-                    <span class="tag">DAX</span>
-                    <span class="tag">Data Visualization</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/Dashboard-Design"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on GitHub ↗
-                </a>
-
-            </article>
-
-            <!-- Project 3 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">🧹</div>
-
-                    <span class="project-type">
-                        Python
-                    </span>
-
-                </div>
-
-                <h3>Data Cleaning & Preprocessing</h3>
-
-                <p>
-                    A data preparation project focused on
-                    cleaning datasets, handling missing values
-                    and preparing data for further analysis.
-                </p>
-
-                <div class="skill-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">NumPy</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on GitHub ↗
-                </a>
-
-            </article>
-
-            <!-- Project 4 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">🔎</div>
-
-                    <span class="project-type">
-                        Analytics
-                    </span>
-
-                </div>
-
-                <h3>Sales Data Analytics</h3>
-
-                <p>
-                    A sales analytics project combining
-                    data preparation, database queries,
-                    reporting and visualization to explore
-                    business performance.
-                </p>
-
-                <div class="skill-tags">
-                    <span class="tag">Excel</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">Power BI</span>
-                    <span class="tag">DAX</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on GitHub ↗
-                </a>
-
-            </article>
-
-            <!-- Project 5 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">🤖</div>
-
-                    <span class="project-type">
-                        Machine Learning
-                    </span>
-
-                </div>
-
-                <h3>Customer Churn Prediction</h3>
-
-                <p>
-                    A machine learning project focused on
-                    customer churn analysis and exploring
-                    factors associated with customer retention.
-                </p>
-
-                <div class="skill-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Machine Learning</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/Customer-Churn-Prediction"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on GitHub ↗
-                </a>
-
-            </article>
-
-            <!-- Project 6 -->
-
-            <article class="card project-card reveal">
-
-                <div class="project-top">
-
-                    <div class="project-icon">📈</div>
-
-                    <span class="project-type">
-                        Exploratory Data Analysis (EDA)
-                    </span>
-
-                </div>
-
-                <h3>EDA on Retail Sales Data</h3>
-
-                <p>
-                    Performed Exploratory Data Analysis (EDA) on a retail sales dataset to identify sales trends, product performance, and key business insights using Python, Pandas, NumPy, Matplotlib, and Seaborn.
-                </p>
-
-                <div class="skill-tags">
-                 <span class="tag">Python</span>
-<span class="tag">Pandas</span>
-<span class="tag">EDA</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/manikpatil-1415/OIBSIP/tree/main/DataAnalytics-L1-EDARetailSales"                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project on Github↗
-                </a>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================
-     CERTIFICATES SECTION
-========================================= -->
-
-<section id="certificates">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Certificates & <span>Achievements</span>
-        </h2>
-
-        <p class="section-subtitle">
-            Professional learning and practical experience.
-        </p>
-
-        <div class="certificates-grid">
-
-            <div class="card certificate-card reveal">
-
-                <div class="certificate-icon">🏆</div>
-
                 <div>
-                    <h3>Deloitte Australia Data Analytics Job Simulation</h3>
-
-                    <p class="issuer">
-                        Forage · August 2026
-                    </p>
-
-                    <p>
-                        Completed a data analytics job simulation
-                        involving data classification, Excel
-                        analysis, dashboard creation and
-                        business-oriented conclusions.
-                    </p>
+                  <div class="text-xs font-black uppercase tracking-wider text-brand-600">Manik Patil</div>
+                  <div class="text-xs text-neutral-600 font-medium">Data Analyst • SQL & Power BI</div>
                 </div>
-
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Active
+              </span>
             </div>
 
-            <div class="card certificate-card reveal">
+          </div>
+        </div>
 
-                <div class="certificate-icon">💻</div>
+      </div>
+    </section>
 
-                <div>
-                    <h3>SQL (Advanced)</h3>
-
-                    <p class="issuer">
-                        HackerRank · August 2026
-                    </p>
-
-                    <p>
-                        SQL certification demonstrating knowledge
-                        of advanced querying concepts and
-                        database problem solving.
-                    </p>
-                </div>
-
+    <!-- SECTION: ABOUT ME -->
+    <section id="about" class="pt-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-extrabold tracking-widest uppercase text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">
+            About Journey
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 font-display">
+            A curious learner passionate about data.
+          </h2>
+          <p class="text-neutral-600 leading-relaxed text-base">
+            I am a B.Sc. graduate trained in Data Analytics and Business Analytics. My goal is to build a career as a Data Analyst and use data to discover useful business insights, build dashboards, and support data-driven decision-making.
+          </p>
+          <div class="pt-4 flex items-center gap-6">
+            <div>
+              <div class="text-3xl font-black text-neutral-900 font-display">6+</div>
+              <div class="text-xs font-medium text-neutral-500">Core Projects</div>
             </div>
-
-            <div class="card certificate-card reveal">
-
-                <div class="certificate-icon">🤖</div>
-
-                <div>
-                    <h3>AI Tools & Claude Workshop</h3>
-
-                    <p class="issuer">
-                        be10x · September 2026
-                    </p>
-
-                    <p>
-                        Workshop focused on learning about
-                        AI tools and their practical applications.
-                    </p>
-                </div>
-
+            <div class="h-10 w-px bg-neutral-200"></div>
+            <div>
+              <div class="text-3xl font-black text-neutral-900 font-display">4</div>
+              <div class="text-xs font-medium text-neutral-500">Certificates</div>
             </div>
-
-            <div class="card certificate-card reveal">
-
-                <div class="certificate-icon">🎓</div>
-
-                <div>
-                    <h3>Data Analytics & Business Analytics with AI/ML</h3>
-
-                    <p class="issuer">
-                        Naresh IT · Hyderabad
-                    </p>
-
-                    <p>
-                        Completed training covering data analytics
-                        tools, business analytics and AI/ML
-                        fundamentals.
-                    </p>
-                </div>
-
+            <div class="h-10 w-px bg-neutral-200"></div>
+            <div>
+              <div class="text-3xl font-black text-neutral-900 font-display">100%</div>
+              <div class="text-xs font-medium text-neutral-500">Hands-on Focus</div>
             </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-xl">
+              📊
+            </div>
+            <h4 class="font-bold text-lg text-neutral-900">Data Analysis</h4>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Explore, clean, and analyze datasets to uncover trends and actionable business conclusions.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-xl">
+              📈
+            </div>
+            <h4 class="font-bold text-lg text-neutral-900">Data Visualization</h4>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Build clean, interactive dashboards in Power BI and Tableau tracking vital commercial metrics.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-xl">
+              💡
+            </div>
+            <h4 class="font-bold text-lg text-neutral-900">Continuous Learning</h4>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Constantly sharpening SQL, statistical problem-solving, and AI workflows through practice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EXPERTISE -->
+    <section id="expertise" class="pt-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 space-y-5">
+          <span class="text-xs font-extrabold tracking-widest uppercase text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">
+            My Expertise
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 leading-[1.15] font-display">
+            Building Modern Digital Solutions with Code & AI
+          </h2>
+          <p class="text-neutral-600 leading-relaxed text-base">
+            Combining full-cycle relational querying, business intelligence dashboards, and predictive Python analytics to deliver impactful digital experiences.
+          </p>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5">
+          
+          <div class="bg-white p-7 rounded-3xl border border-neutral-200 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row gap-6 items-start">
+            <span class="px-3.5 py-1 rounded-full bg-brand-600 text-white font-mono text-xs font-bold">
+              01
+            </span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-neutral-900">SQL & Relational Databases</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Writing optimized SQL queries using Common Table Expressions (CTEs), Subqueries, Window Functions, and multi-table Joins in MySQL for structured data pipelines.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-3xl border border-neutral-200 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row gap-6 items-start">
+            <span class="px-3.5 py-1 rounded-full bg-brand-600 text-white font-mono text-xs font-bold">
+              02
+            </span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-neutral-900">Business Intelligence & Reporting</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Developing executive dashboards in Power BI and Tableau. Skilled with DAX calculations, Power Query data transformation, and dynamic KPI visualization.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-3xl border border-neutral-200 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row gap-6 items-start">
+            <span class="px-3.5 py-1 rounded-full bg-brand-600 text-white font-mono text-xs font-bold">
+              03
+            </span>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-neutral-900">Python Analytics & Preprocessing</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                Performing Exploratory Data Analysis (EDA), missing-data handling, data formatting, and predictive models using Pandas, NumPy, Matplotlib, and Scikit-Learn.
+              </p>
+            </div>
+          </div>
 
         </div>
 
-    </div>
+      </div>
+    </section>
 
-</section>
-
-<!-- =========================================
-     EDUCATION SECTION
-========================================= -->
-
-<section id="education">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            My <span>Education</span>
+    <!-- SECTION: TECHNICAL STACK -->
+    <section id="skills" class="pt-8 space-y-10">
+      <div class="space-y-3">
+        <span class="text-xs font-extrabold tracking-widest uppercase text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">
+          TECHNICAL STACK
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 font-display">
+          Technologies I Work With
         </h2>
-
-        <p class="section-subtitle">
-            Academic background and professional training.
+        <p class="text-neutral-600 max-w-2xl text-base">
+          Tools and technologies used for data analysis, reporting, dashboarding, and analytical modeling.
         </p>
+      </div>
 
-        <div class="card education-card reveal">
-
-            <h3>Bachelor of Science (B.Sc.)</h3>
-
-            <p class="degree">
-                Science and Technology · 2023–2026
-            </p>
-
-            <p>
-                Adarsh Senior College, Omerga,
-                Dharashiv, Maharashtra.
-            </p>
-
-            <br>
-
-            <h3>Data Analytics & Business Analytics with AI/ML</h3>
-
-            <p class="degree">
-                Professional Training · Naresh IT, Hyderabad
-            </p>
-
-            <p>
-                Training in data analytics, business analytics,
-                programming and data visualization tools.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================
-     CONTACT SECTION
-========================================= -->
-
-<section id="contact">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Let's <span>Connect</span>
-        </h2>
-
-        <p class="section-subtitle">
-            I am interested in entry-level Data Analyst
-            opportunities, internships and professional
-            connections.
-        </p>
-
-        <div class="card contact-card reveal">
-
-            <h3>Have an opportunity or project in mind?</h3>
-
-            <p>
-                Feel free to connect with me through email,
-                LinkedIn or GitHub.
-            </p>
-
-            <div class="contact-links">
-
-                <a
-                    class="contact-link"
-                    href="mailto:manikpatilmp1415@gmail.com">
-                    ✉️ Email Me
-                </a>
-
-                <a
-                    class="contact-link"
-                    href="https://www.linkedin.com/in/manikpatil1415"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    💼 LinkedIn
-                </a>
-
-                <a
-                    class="contact-link"
-                    href="https://github.com/manikpatil-1415"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    💻 GitHub
-                </a>
-
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- SQL & Databases -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              🗄️
             </div>
-
+            <h3 class="font-bold text-lg text-neutral-900">SQL & Databases</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Querying, joins, and relational architecture</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">SQL</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">MySQL</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Joins</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">CTEs</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Window Functions</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Aggregations</span>
+          </div>
         </div>
 
-    </div>
+        <!-- Python -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              🐍
+            </div>
+            <h3 class="font-bold text-lg text-neutral-900">Python</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Data wrangling, cleaning, and statistics</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Python</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Pandas</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">NumPy</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Matplotlib</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Seaborn</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Data Cleaning</span>
+          </div>
+        </div>
 
-</section>
+        <!-- Business Intelligence -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              📊
+            </div>
+            <h3 class="font-bold text-lg text-neutral-900">Business Intelligence</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Interactive dashboards and visual KPIs</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Power BI</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">DAX</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Power Query</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Tableau</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Dashboards</span>
+          </div>
+        </div>
 
-</main>
+        <!-- Microsoft Excel -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              📑
+            </div>
+            <h3 class="font-bold text-lg text-neutral-900">Microsoft Excel</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Summary formulas, pivots, and reporting</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Pivot Tables</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Formulas</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Charts</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">VLOOKUP/XLOOKUP</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Reporting</span>
+          </div>
+        </div>
 
-<!-- =========================================
-     FOOTER
-========================================= -->
+        <!-- Analytical Skills -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              📐
+            </div>
+            <h3 class="font-bold text-lg text-neutral-900">Analytical Skills</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Statistical deduction and problem solving</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Statistics</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">EDA</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Data Interpretation</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Business Insights</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Problem Solving</span>
+          </div>
+        </div>
 
-<footer>
-    <div class="container">
-        <p>
-            Designed with <span>♥</span> by Manik Patil
+        <!-- AI & Additional Tools -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm hover:border-brand-500 transition-all space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
+              🤖
+            </div>
+            <h3 class="font-bold text-lg text-neutral-900">Additional Knowledge</h3>
+          </div>
+          <p class="text-xs text-neutral-500">Version control, notebook environments, AI tools</p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">AI/ML Fundamentals</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">GitHub</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Google Colab</span>
+            <span class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-neutral-100 text-neutral-800">Data Storytelling</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED WORK -->
+    <section id="projects" class="pt-8 space-y-10">
+      <div class="space-y-3">
+        <span class="text-xs font-extrabold tracking-widest uppercase text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">
+          Featured Work
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 font-display">
+          Projects That Define My Journey
+        </h2>
+        <p class="text-neutral-600 max-w-2xl text-base">
+          Explore my data analysis, dashboarding, data preparation, and machine learning work.
         </p>
+      </div>
 
-        <p>
-            Data Analyst Portfolio ·
-            <span id="currentYear"></span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Project 1: SQL Data Analysis -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                SQL
+              </span>
+              <span class="text-2xl">🗄️</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              SQL Data Analysis
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              SQL-based data analysis practice using queries, aggregations, and data exploration to answer analytical business questions.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">SQL</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">MySQL</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Data Analysis</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/Task-4-SQL-Data-Analysis" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Dashboard Design -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                Power BI
+              </span>
+              <span class="text-2xl">📊</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              Dashboard Design
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              An interactive dashboard project focused on presenting financial and sales performance through visualizations and business metrics.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Power BI</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">DAX</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Data Visualization</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/Dashboard-Design" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: Data Cleaning & Preprocessing -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                Python
+              </span>
+              <span class="text-2xl">🧹</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              Data Cleaning & Preprocessing
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              A data preparation project focused on cleaning datasets, handling missing values, and preparing data for further analysis.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Python</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Pandas</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">NumPy</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/Data-Cleaning-and-Preprocessing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4: Sales Data Analytics Project -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                Analytics
+              </span>
+              <span class="text-2xl">🔎</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              Sales Data Analytics
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              A sales analytics project combining data preparation, database queries, reporting, and visualization to explore business performance.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Excel</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">MySQL</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Power BI</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">DAX</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/Sales-Data-Analytics-Project" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 5: Customer Churn Prediction -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                Machine Learning
+              </span>
+              <span class="text-2xl">🤖</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              Customer Churn Prediction
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              A machine learning project focused on customer churn analysis and exploring factors associated with customer retention.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Python</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Pandas</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Machine Learning</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/Customer-Churn-Prediction" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 6: EDA on Retail Sales Data -->
+        <div class="bg-white rounded-3xl border border-neutral-200 p-6 flex flex-col justify-between hover:border-brand-500 hover:shadow-lg transition-all group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-[11px] font-extrabold tracking-wider uppercase">
+                Exploratory Analysis
+              </span>
+              <span class="text-2xl">📈</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 group-hover:text-brand-600 transition-colors">
+              EDA on Retail Sales Data
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Performed Exploratory Data Analysis (EDA) on a retail sales dataset to identify sales trends, product performance, and key insights using Python.
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Python</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">Pandas</span>
+              <span class="px-2.5 py-1 text-[11px] font-semibold bg-neutral-100 rounded text-neutral-700">EDA</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-neutral-100 mt-6">
+            <a href="https://github.com/manikpatil-1415/OIBSIP/tree/main/DataAnalytics-L1-EDARetailSales" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-brand-600">
+              View Project on GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PROFESSIONAL CREDENTIALS -->
+    <section id="credentials" class="pt-8 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-neutral-500 uppercase tracking-widest">
+            <span class="w-2 h-2 rounded-full bg-brand-600"></span> Verified Credentials & Badges
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900 font-display">
+            Professional Credentials
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm font-mono text-neutral-500">
+          Total of 4 completed certifications & programs
         </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Credential 1 -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm flex gap-5 items-start hover:border-brand-500 transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-2xl flex-shrink-0">
+            🏆
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded">Forage</span>
+              <span class="text-xs text-neutral-400 font-mono">August 2026</span>
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900">Deloitte Australia Data Analytics Job Simulation</h3>
+            <p class="text-sm text-neutral-600">
+              Completed simulation involving data classification, Excel analysis, dashboard creation, and business-oriented conclusions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Credential 2 -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm flex gap-5 items-start hover:border-brand-500 transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-2xl flex-shrink-0">
+            💻
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded">HackerRank</span>
+              <span class="text-xs text-neutral-400 font-mono">August 2026</span>
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900">SQL (Advanced) Certification</h3>
+            <p class="text-sm text-neutral-600">
+              SQL certification demonstrating knowledge of advanced querying concepts and database problem solving.
+            </p>
+          </div>
+        </div>
+
+        <!-- Credential 3 -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm flex gap-5 items-start hover:border-brand-500 transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-2xl flex-shrink-0">
+            🤖
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded">be10x</span>
+              <span class="text-xs text-neutral-400 font-mono">September 2026</span>
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900">AI Tools & Claude Workshop</h3>
+            <p class="text-sm text-neutral-600">
+              Workshop focused on learning about modern AI tools and their practical applications.
+            </p>
+          </div>
+        </div>
+
+        <!-- Credential 4 -->
+        <div class="bg-white p-7 rounded-3xl border border-neutral-200/90 shadow-sm flex gap-5 items-start hover:border-brand-500 transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-2xl flex-shrink-0">
+            🎓
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded">Naresh IT</span>
+              <span class="text-xs text-neutral-400 font-mono">Hyderabad</span>
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900">Data Analytics & Business Analytics with AI/ML</h3>
+            <p class="text-sm text-neutral-600">
+              Completed training covering data analytics tools, business analytics, and AI/ML fundamentals.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Education Box -->
+      <div id="education" class="p-8 rounded-3xl bg-neutral-900 text-white border border-neutral-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-brand-500 font-bold">Academic Foundation</span>
+          <h3 class="text-2xl font-bold mt-1">Bachelor of Science (B.Sc.)</h3>
+          <p class="text-neutral-400 text-sm mt-0.5">Science and Technology (2023–2026) • Adarsh Senior College, Omerga, Dharashiv, Maharashtra</p>
+        </div>
+        <a href="mailto:manikpatilmp1415@gmail.com?subject=Resume%20Request%20-%20Data%20Analyst" class="px-6 py-3 rounded-full bg-white text-neutral-900 font-bold text-sm hover:bg-neutral-100 transition whitespace-nowrap">
+          Request Full Resume ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION: CONTACT -->
+    <section id="contact" class="relative pt-12">
+      
+      <!-- Large Watermark Typography in Background -->
+      <div class="text-center select-none pointer-events-none -mb-16 sm:-mb-24 overflow-hidden">
+        <h2 class="text-[18vw] font-black uppercase text-neutral-200/70 tracking-tighter leading-none font-display">
+          CONTACT
+        </h2>
+      </div>
+
+      <!-- Crimson Contact Card Form -->
+      <div class="relative z-10 max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-[#E11D48] via-[#E11D48] to-[#C0103A] text-white p-8 sm:p-14 shadow-2xl">
+        <div class="space-y-6 mb-8">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/80">
+            <span class="w-2 h-2 rounded-full bg-white"></span> REACH OUT
+          </div>
+          <h3 class="text-3xl sm:text-5xl font-black font-display tracking-tight leading-tight">
+            Let's build something data-driven together.
+          </h3>
+          <p class="text-white/80 text-sm sm:text-base max-w-xl">
+            I am interested in entry-level Data Analyst opportunities, internships, and professional connections. Send a message directly or connect via LinkedIn.
+          </p>
+        </div>
+
+        <form action="mailto:manikpatilmp1415@gmail.com" method="POST" enctype="text/plain" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-white/90">First Name</label>
+              <input type="text" name="First Name" required placeholder="John" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 focus:border-white transition text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-white/90">Last Name</label>
+              <input type="text" name="Last Name" required placeholder="Doe" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 focus:border-white transition text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-white/90">Email Address</label>
+            <input type="email" name="Email" required placeholder="john@example.com" class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 focus:border-white transition text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-white/90">Your Message</label>
+            <textarea name="Message" rows="4" required placeholder="Type your message or opportunity details here..." class="w-full px-5 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 focus:border-white transition text-sm"></textarea>
+          </div>
+
+          <div class="flex items-center gap-3 pt-2">
+            <input type="checkbox" id="consent" required class="w-4 h-4 rounded text-brand-600 focus:ring-0 accent-neutral-900 cursor-pointer" />
+            <label for="consent" class="text-xs text-white/80 cursor-pointer">
+              I give permission to contact me at this email address regarding professional opportunities.
+            </label>
+          </div>
+
+          <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <button type="submit" class="px-8 py-4 rounded-full bg-neutral-950 text-white font-bold text-sm hover:bg-black transition-all shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              Send Message <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+            <a href="mailto:manikpatilmp1415@gmail.com" class="text-xs font-mono text-white/90 hover:underline flex items-center gap-1.5 justify-center sm:justify-start">
+              <i data-lucide="mail" class="w-4 h-4"></i> manikpatilmp1415@gmail.com
+            </a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BRAND FOOTER -->
+  <footer class="bg-neutral-950 text-white mt-24 pt-20 pb-12 overflow-hidden border-t border-neutral-900">
+    <div class="max-w-7xl mx-auto px-6 space-y-14">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-12 border-b border-neutral-800">
+        <div class="space-y-3">
+          <div class="text-2xl font-black font-display">Manik Patil<span class="text-brand-600">.</span></div>
+          <p class="text-sm text-neutral-400 max-w-sm">
+            Data Analyst turning complex datasets into decisive actions. Open to opportunities across India & Remote.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="mailto:manikpatilmp1415@gmail.com" class="px-5 py-2.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-mono transition flex items-center gap-2">
+            <i data-lucide="mail" class="w-3.5 h-3.5 text-brand-500"></i> Email Me
+          </a>
+          <a href="https://www.linkedin.com/in/manikpatil1415" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-mono transition flex items-center gap-2">
+            <i data-lucide="linkedin" class="w-3.5 h-3.5 text-brand-500"></i> LinkedIn ↗
+          </a>
+          <a href="https://github.com/manikpatil-1415" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-mono transition flex items-center gap-2">
+            <i data-lucide="github" class="w-3.5 h-3.5 text-brand-500"></i> GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Watermark Name Banner -->
+      <div class="text-center select-none pointer-events-none py-4">
+        <div class="text-[14vw] font-black lowercase tracking-tighter leading-none text-neutral-800/60 font-display">
+          manik
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 font-mono gap-4 pt-6 border-t border-neutral-900">
+        <div>© 2026 Manik Patil. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="#home" class="hover:text-white transition">Back to Top ↑</a>
+        </div>
+      </div>
+
     </div>
-</footer>
+  </footer>
 
-<!-- =========================================
-     JAVASCRIPT
-     ANIMATED CHARTS + PARTICLES + NETWORK
-========================================= -->
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
 
-<script>
-(() => {
-    "use strict";
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    /* =====================================
-       MOBILE NAVIGATION
-    ===================================== */
-
-    const menuButton = document.getElementById("menuButton");
-    const navLinks = document.getElementById("navLinks");
-
-    menuButton.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-
-        menuButton.setAttribute(
-            "aria-expanded",
-            String(isOpen)
-        );
-
-        menuButton.textContent = isOpen ? "✕" : "☰";
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("open");
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.textContent = "☰";
-        });
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
     });
-
-    /* =====================================
-       CURRENT YEAR
-    ===================================== */
-
-    document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
-
-    /* =====================================
-       SCROLL REVEAL
-    ===================================== */
-
-    const revealElements = document.querySelectorAll(".reveal");
-
-    if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            {
-                threshold: 0.12
-            }
-        );
-
-        revealElements.forEach(element => {
-            observer.observe(element);
-        });
-    } else {
-        revealElements.forEach(element => {
-            element.classList.add("visible");
-        });
-    }
-
-    /* =====================================
-       CANVAS ANIMATION
-    ===================================== */
-
-    const canvas = document.getElementById("dataCanvas");
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-        return;
-    }
-
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
-    let time = 0;
-    let frameId = null;
-    let lastFrame = 0;
-
-    let particles = [];
-    let bars = [];
-
-    const mouse = {
-        x: -1000,
-        y: -1000
-    };
-
-    const reducedMotionQuery = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    );
-
-    // Keep the background animated even when the device
-    // requests reduced motion.
-    const animationEnabled = true;
-
-    function random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    /* =====================================
-       RESIZE CANVAS
-    ===================================== */
-
-    function resizeCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        createParticles();
-        createBars();
-    }
-
-    /* =====================================
-       CREATE GLOWING PARTICLES
-    ===================================== */
-
-    function createParticles() {
-        particles = [];
-
-        const particleCount = Math.min(
-            85,
-            Math.max(35, Math.floor(width / 15))
-        );
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: random(0, width),
-                y: random(0, height),
-
-                vx: random(-0.24, 0.24),
-                vy: random(-0.24, 0.24),
-
-                radius: random(1, 2.5),
-                phase: random(0, Math.PI * 2)
-            });
-        }
-    }
-
-    /* =====================================
-       CREATE DATA CHART BARS
-    ===================================== */
-
-    function createBars() {
-        bars = [];
-
-        const count = Math.max(
-            9,
-            Math.floor(width / 100)
-        );
-
-        for (let i = 0; i < count; i++) {
-            bars.push({
-                x: (width / count) * i + 12,
-                height: random(25, 100),
-                phase: random(0, Math.PI * 2),
-                speed: random(0.5, 1.3)
-            });
-        }
-    }
-
-    /* =====================================
-       DRAW GRID
-    ===================================== */
-
-    function drawGrid() {
-        const gap = 55;
-
-        ctx.lineWidth = 0.5;
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.055)";
-
-        ctx.beginPath();
-
-        for (let x = 0; x < width; x += gap) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, height);
-        }
-
-        for (let y = 0; y < height; y += gap) {
-            ctx.moveTo(0, y);
-            ctx.lineTo(width, y);
-        }
-
-        ctx.stroke();
-    }
-
-    /* =====================================
-       DRAW MOVING CHART BARS
-    ===================================== */
-
-    function drawBars() {
-        const baseY = height * 0.88;
-
-        bars.forEach((bar, index) => {
-            const movement = Math.sin(
-                time * bar.speed + bar.phase
-            );
-
-            const barHeight = bar.height + movement * 22;
-            const x = bar.x;
-
-            const gradient = ctx.createLinearGradient(
-                0,
-                baseY - barHeight,
-                0,
-                baseY
-            );
-
-            gradient.addColorStop(
-                0,
-                "rgba(34, 211, 238, 0.42)"
-            );
-
-            gradient.addColorStop(
-                1,
-                "rgba(37, 99, 235, 0.015)"
-            );
-
-            ctx.fillStyle = gradient;
-
-            ctx.fillRect(
-                x,
-                baseY - barHeight,
-                8,
-                barHeight
-            );
-
-            ctx.fillStyle = "rgba(56, 189, 248, 0.65)";
-
-            ctx.fillRect(
-                x,
-                baseY - barHeight - 2,
-                8,
-                2
-            );
-        });
-    }
-
-    /* =====================================
-       DRAW MOVING DATA WAVE
-    ===================================== */
-
-    function drawWave() {
-        const waveY = height * 0.58;
-
-        ctx.beginPath();
-
-        for (let x = 0; x <= width; x += 5) {
-            const y =
-                waveY +
-                Math.sin(x * 0.008 + time) * 20 +
-                Math.sin(x * 0.018 - time * 1.4) * 9;
-
-            if (x === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
-        }
-
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.19)";
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        ctx.lineTo(width, height);
-        ctx.lineTo(0, height);
-        ctx.closePath();
-
-        const gradient = ctx.createLinearGradient(
-            0,
-            waveY - 35,
-            0,
-            height
-        );
-
-        gradient.addColorStop(
-            0,
-            "rgba(34, 211, 238, 0.055)"
-        );
-
-        gradient.addColorStop(
-            1,
-            "rgba(34, 211, 238, 0)"
-        );
-
-        ctx.fillStyle = gradient;
-        ctx.fill();
-    }
-
-    /* =====================================
-       DRAW MOVING NETWORK
-    ===================================== */
-
-    function drawNetwork() {
-        const connectionDistance = 135;
-
-        for (let i = 0; i < particles.length; i++) {
-            const particle = particles[i];
-
-            // Move particles continuously.
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-
-            // Add subtle floating motion.
-            particle.x += Math.sin(
-                time + particle.phase
-            ) * 0.12;
-
-            particle.y += Math.cos(
-                time * 0.8 + particle.phase
-            ) * 0.12;
-
-            // Wrap particles around screen edges.
-            if (particle.x < -10) particle.x = width + 10;
-            if (particle.x > width + 10) particle.x = -10;
-
-            if (particle.y < -10) particle.y = height + 10;
-            if (particle.y > height + 10) particle.y = -10;
-
-            // Connect nearby particles.
-            for (let j = i + 1; j < particles.length; j++) {
-                const other = particles[j];
-
-                const dx = particle.x - other.x;
-                const dy = particle.y - other.y;
-
-                const distance = Math.sqrt(
-                    dx * dx + dy * dy
-                );
-
-                if (distance < connectionDistance) {
-                    const opacity =
-                        (1 - distance / connectionDistance) * 0.24;
-
-                    ctx.beginPath();
-
-                    ctx.moveTo(particle.x, particle.y);
-                    ctx.lineTo(other.x, other.y);
-
-                    ctx.strokeStyle =
-                        "rgba(56, 189, 248, " +
-                        opacity +
-                        ")";
-
-                    ctx.lineWidth = 0.7;
-                    ctx.stroke();
-                }
-            }
-
-            // Draw glowing nodes.
-            const glow = 0.65 +
-                Math.sin(time * 2 + particle.phase) * 0.25;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.radius + glow * 0.5,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                "rgba(103, 232, 249, " + glow + ")";
-
-            ctx.shadowBlur = 9;
-            ctx.shadowColor = "#22d3ee";
-
-            ctx.fill();
-
-            ctx.shadowBlur = 0;
-        }
-    }
-
-    /* =====================================
-       MAIN ANIMATION LOOP
-    ===================================== */
-
-    function draw(timestamp) {
-        frameId = null;
-
-        // Pause only when the browser tab is hidden.
-        if (document.hidden) {
-            return;
-        }
-
-        // Keep animation smooth without overloading
-        // the browser with excessive redraws.
-        if (timestamp - lastFrame < 25) {
-            frameId = requestAnimationFrame(draw);
-            return;
-        }
-
-        lastFrame = timestamp;
-
-        // This value changes every frame.
-        // It drives the movement of charts and waves.
-        time += 0.025;
-
-        ctx.clearRect(0, 0, width, height);
-
-        drawGrid();
-        drawBars();
-        drawWave();
-        drawNetwork();
-
-        // Always request another frame.
-        // This keeps the background moving.
-        frameId = requestAnimationFrame(draw);
-    }
-
-    /* =====================================
-       START / STOP ANIMATION
-    ===================================== */
-
-    function startAnimation() {
-        if (frameId !== null) {
-            cancelAnimationFrame(frameId);
-            frameId = null;
-        }
-
-        lastFrame = 0;
-        frameId = requestAnimationFrame(draw);
-    }
-
-    function stopAnimation() {
-        if (frameId !== null) {
-            cancelAnimationFrame(frameId);
-            frameId = null;
-        }
-    }
-
-    /* =====================================
-       MOUSE INTERACTION
-    ===================================== */
-
-    window.addEventListener(
-        "pointermove",
-        event => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-        },
-        { passive: true }
-    );
-
-    window.addEventListener(
-        "pointerleave",
-        () => {
-            mouse.x = -1000;
-            mouse.y = -1000;
-        },
-        { passive: true }
-    );
-
-    /* =====================================
-       PAGE VISIBILITY
-    ===================================== */
-
-    document.addEventListener(
-        "visibilitychange",
-        () => {
-            if (document.hidden) {
-                stopAnimation();
-            } else if (animationEnabled) {
-                startAnimation();
-            }
-        }
-    );
-
-    /* =====================================
-       INITIALIZE
-    ===================================== */
-
-    window.addEventListener(
-        "resize",
-        resizeCanvas,
-        { passive: true }
-    );
-
-    resizeCanvas();
-
-    // Start the animation immediately.
-    startAnimation();
-
-})();
-</script>
-
+  </script>
 </body>
 </html>
