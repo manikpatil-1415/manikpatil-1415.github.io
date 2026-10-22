@@ -53,14 +53,6 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #e11d48;
     }
-    @keyframes pulse-ring {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.1); opacity: 0.4; }
-      100% { transform: scale(0.95); opacity: 0.8; }
-    }
-    .sound-pulse {
-      animation: pulse-ring 2s infinite ease-in-out;
-    }
   </style>
 </head>
 <body class="bg-[#F8FAFC] text-neutral-900 antialiased font-sans selection:bg-brand-600 selection:text-white">
@@ -109,11 +101,11 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-24">
 
-    <!-- HERO SECTION WITH TALKING VIDEO EMBED (Exact Match to Reel) -->
+    <!-- HERO SECTION WITH FAIL-SAFE MEDIA CONTAINER -->
     <section id="home" class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#E11D48] via-[#E11D48] to-[#C0103A] text-white p-8 sm:p-12 lg:p-14 shadow-2xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
-        <!-- Left Side: Intro & Action Buttons -->
+        <!-- Left Side: Content -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-wide">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -138,7 +130,7 @@
             </a>
           </div>
 
-          <!-- Bottom Stat Strip -->
+          <!-- Bottom Metric Strip -->
           <div class="pt-6 border-t border-white/20 grid grid-cols-3 gap-4 max-w-lg">
             <div>
               <div class="text-2xl sm:text-3xl font-black font-display">SQL</div>
@@ -155,67 +147,74 @@
           </div>
         </div>
 
-        <!-- Right Side: The Talking Video Container (Matches Reel at 00:00 & 00:17) -->
+        <!-- Right Side: Fail-Safe Media Container (Guaranteed to Display) -->
         <div class="lg:col-span-5 relative flex flex-col items-center">
-          
-          <!-- Outer Video Shell -->
           <div class="relative w-full max-w-md bg-neutral-950/40 backdrop-blur-xl border border-white/30 rounded-3xl p-3 sm:p-4 shadow-2xl overflow-hidden group">
             
-            <!-- Video Player -->
-            <div class="relative w-full aspect-[4/4.5] sm:aspect-[4/4.8] rounded-2xl overflow-hidden bg-neutral-900 shadow-inner">
+            <div class="relative w-full aspect-[4/4.8] rounded-2xl overflow-hidden bg-neutral-900 shadow-inner flex items-center justify-center">
+              
+              <!-- Video Layer: Tries to play intro.mp4 -->
               <video 
                 id="intro-video"
                 autoplay 
                 muted 
                 loop 
                 playsinline
-                class="w-full h-full object-cover"
-                poster="profile.png"
+                class="hidden w-full h-full object-cover"
               >
-                <!-- Put your intro.mp4 in your repo root -->
                 <source src="intro.mp4" type="video/mp4" />
-                <!-- Fallback interactive preview clip if intro.mp4 isn't uploaded yet -->
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-young-man-working-with-headphones-42467-large.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
               </video>
 
-              <!-- Live Talking Status Overlay -->
-              <div class="absolute top-3 left-3 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-semibold text-white">
-                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                <span>Video Introduction</span>
+              <!-- Image Fallback Layer: Always displays your profile photo until intro.mp4 is uploaded -->
+              <div id="image-fallback" class="w-full h-full flex flex-col items-center justify-center p-6 text-center relative overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-950 to-black">
+                <div class="relative mb-4">
+                  <div class="absolute -inset-2 bg-gradient-to-r from-rose-500 to-brand-600 rounded-full blur-md opacity-75 animate-pulse"></div>
+                  <!-- Automatically uses GitHub profile photo -->
+                  <img 
+                    src="profile.png" 
+                    onerror="this.onerror=null; this.src='https://github.com/manikpatil-1415.png';"
+                    alt="Manik Patil" 
+                    class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full object-cover border-4 border-white shadow-2xl"
+                  />
+                </div>
+                <h3 class="text-xl font-bold text-white font-display">Manik Patil</h3>
+                <p class="text-xs text-neutral-300 mt-1 max-w-xs">Data Analyst • Ready to connect</p>
+                
+                <div class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs text-emerald-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Active Portfolio
+                </div>
               </div>
 
-              <!-- Unmute / Listen Audio Controller Button -->
+              <!-- Top Left Badge -->
+              <div class="absolute top-3 left-3 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-semibold text-white">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                <span id="badge-label">Portfolio Spotlight</span>
+              </div>
+
+              <!-- Audio/Video Controller (visible if video loads) -->
               <button 
                 id="audio-toggle-btn"
-                class="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white text-neutral-900 font-bold text-xs shadow-2xl hover:bg-neutral-100 hover:scale-105 transition-all cursor-pointer"
-                aria-label="Toggle Audio"
+                class="hidden absolute bottom-4 right-4 z-20 items-center gap-2 px-4 py-2 rounded-full bg-white text-neutral-900 font-bold text-xs shadow-2xl hover:bg-neutral-100 transition-all cursor-pointer"
               >
                 <i id="audio-icon" data-lucide="volume-x" class="w-4 h-4 text-brand-600"></i>
                 <span id="audio-text">Click to Listen</span>
               </button>
 
-              <!-- Subtle Audio Visualizer Bar -->
-              <div id="sound-indicator" class="hidden absolute bottom-4 left-4 z-20 flex items-end gap-1 h-4">
-                <span class="w-1 bg-emerald-400 rounded-full h-2 animate-bounce"></span>
-                <span class="w-1 bg-emerald-400 rounded-full h-4 animate-bounce" style="animation-delay: 0.15s"></span>
-                <span class="w-1 bg-emerald-400 rounded-full h-3 animate-bounce" style="animation-delay: 0.3s"></span>
-              </div>
             </div>
 
-            <!-- Profile Info Bar Below Video -->
+            <!-- Profile Info Bar -->
             <div class="mt-3 px-3 py-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 flex items-center justify-between">
               <div>
                 <div class="text-xs font-extrabold uppercase tracking-wider text-white">Manik Patil</div>
                 <div class="text-[11px] text-white/80">Data Analyst & Business Analytics</div>
               </div>
-              <span class="px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-emerald-400/40 text-[10px] font-bold">
-                Online
-              </span>
+              <a href="https://github.com/manikpatil-1415" target="_blank" rel="noopener noreferrer" class="text-xs text-brand-200 hover:text-white font-mono flex items-center gap-1">
+                GitHub ↗
+              </a>
             </div>
 
           </div>
-
         </div>
 
       </div>
@@ -286,7 +285,7 @@
       </div>
     </section>
 
-    <!-- SECTION: EXPERTISE (Matches Video) -->
+    <!-- SECTION: EXPERTISE -->
     <section id="expertise" class="pt-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
@@ -853,7 +852,7 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Initialization & Media Detection Script -->
   <script>
     lucide.createIcons();
 
@@ -871,26 +870,45 @@
       });
     });
 
-    // Talking Video Audio Toggle Controller
+    // Smart Media Detection (Video vs Image Fallback)
     const video = document.getElementById('intro-video');
+    const fallback = document.getElementById('image-fallback');
     const audioBtn = document.getElementById('audio-toggle-btn');
+    const badgeLabel = document.getElementById('badge-label');
+
+    // Test if intro.mp4 actually exists and can play
+    video.addEventListener('canplay', () => {
+      // If intro.mp4 exists and is loaded:
+      video.classList.remove('hidden');
+      fallback.classList.add('hidden');
+      audioBtn.classList.remove('hidden');
+      audioBtn.classList.add('flex');
+      badgeLabel.innerText = "Video Introduction";
+    });
+
+    video.addEventListener('error', () => {
+      // If intro.mp4 is missing or fails:
+      video.classList.add('hidden');
+      fallback.classList.remove('hidden');
+      audioBtn.classList.add('hidden');
+      badgeLabel.innerText = "Portfolio Spotlight";
+    });
+
+    // Audio Unmute Toggle
     const audioIcon = document.getElementById('audio-icon');
     const audioText = document.getElementById('audio-text');
-    const soundIndicator = document.getElementById('sound-indicator');
 
     audioBtn.addEventListener('click', () => {
       if (video.muted) {
         video.muted = false;
-        video.currentTime = 0; // restarts speech from beginning with sound
+        video.currentTime = 0;
         video.play();
         audioText.innerText = "Mute Audio";
         audioIcon.setAttribute('data-lucide', 'volume-2');
-        soundIndicator.classList.remove('hidden');
       } else {
         video.muted = true;
         audioText.innerText = "Click to Listen";
         audioIcon.setAttribute('data-lucide', 'volume-x');
-        soundIndicator.classList.add('hidden');
       }
       lucide.createIcons();
     });
